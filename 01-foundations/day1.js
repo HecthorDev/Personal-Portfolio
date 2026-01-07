@@ -35,3 +35,16 @@ if (isStudent || isSenior) {
 } else {
     console.log("Pagas el boleto");
 }
+
+// Ejercicio 4: !
+
+const highIncome = false;
+const hasGuarantor = true;
+const hasDebt = false; // No tiene deuda
+
+if ((highIncome || hasGuarantor) && !hasDebt) {
+    console.log("Loan Approved");
+} else {
+    console.log("Loan Denied");
+}
+
