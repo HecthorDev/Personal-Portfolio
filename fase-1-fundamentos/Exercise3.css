@@ -37,11 +37,15 @@ label {
     color: #555;
 }
 
-input {
+.form-control {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+}
+
+.checkbox {
+    display: inline-block;
 }
 
 .btn-primary {
@@ -54,8 +58,4 @@ input {
     font-size: 16px;
     cursor: pointer;
     margin-top: 10px;
-}
-
-.btn-primary:hover {
-    background-color: #0056b3;
 }
