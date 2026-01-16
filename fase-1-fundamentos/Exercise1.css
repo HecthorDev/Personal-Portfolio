@@ -1,0 +1,9 @@
+* {
+    box-sizing: border-box;
+}
+
+.profile-card {
+    padding: auto;
+    margin: auto;
+    text-align: center;
+}
