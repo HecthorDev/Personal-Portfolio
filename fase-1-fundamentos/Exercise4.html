@@ -39,10 +39,11 @@
         const loginForm = document.querySelector('.login-card');
         loginForm.addEventListener('submit', function(event) {
             event.preventDefault();
-            alert('Ingresando de manera profesional...');
+            const email = document.getElementById('email').value;
+            alert('Intentando iniciar sesión con:' + email);
         });
     </script>
-    
+
 </body>
 
 </html>
