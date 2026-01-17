@@ -30,10 +30,19 @@
             <label for="remember">Recordar mi sesión</label>
             </div>
 
-            <button type="submit" onclick="alert('Ingresando...')" class="btn-primary">Log in</button>
+            <button type="submit" class="btn-primary">Log in</button>
 
         </form>
     </main>
+
+    <script>
+        const loginForm = document.querySelector('.login-card');
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Ingresando de manera profesional...');
+        });
+    </script>
+    
 </body>
 
 </html>
