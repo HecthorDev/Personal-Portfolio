@@ -36,13 +36,23 @@
     </main>
 
     <script>
+
         const loginForm = document.querySelector('.login-card');
+        
         loginForm.addEventListener('submit', function(event) {
             event.preventDefault();
+
             const email = document.getElementById('email').value;
-            alert('Intentando iniciar sesión con:' + email);
+            const password = document.getElementById('password').value;
+            
+            if (password.length < 6) {
+                alert('La contraseña debe tener al menos 6 caracteres.');
+            } else {
+                alert('Ingresando con: ' + email);
+            }
         });
-    </script>
+        
+        </script>
 
 </body>
 
