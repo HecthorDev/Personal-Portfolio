@@ -44,23 +44,24 @@
 
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
+            const titulo = document.querySelector('.title');
             
-            
-
             if (password.length < 6) {
                 alert('La contraseña debe tener al menos 6 caracteres.');
-            } else if   (!email.includes('@')) {
-                alert("¿El email no tiene una arroba @?");
-            } else {
+                
+                    } else if   (!email.includes('@')) {
+                    alert("¿El email no tiene una arroba @?");
+                    } else {
 
-                if (email === "hectorgarciajobs19@gmail.com") {
-                alert('Bienvenido Jefe ' + email);
-                } else {
-                alert("ERROR: Acceso Denegado: Solo personal autorizado");
+                    if (email === "hectorgarciajobs19@gmail.com") {
+                    console.log("Bienvenido Jefe");
+                    titulo.innerText = "Bienvenido Jefe";
+                    } else {
+                    alert("ERROR: Acceso Denegado: Solo personal autorizado");
+                    }
                 }
-            }
-        });
-        
+            });
+
         </script>
 
 </body>
