@@ -51,18 +51,24 @@
             titulo.classList.remove('error');
             titulo.classList.remove('success');
             passwordInput.classList.remove('input-error');
+            emailInput.classList.remove('input-error');
             
             if (password.length < 6) {
                 passwordInput.classList.add('input-error');
+                titulo.classList.add('error');
+                titulo.innerText = 'La contraseña debe tener al menos 6 caracteres.';
+
             } else if   (!email.includes('@')) {
                 emailInput.classList.add('input-error');
+                titulo.classList.add('error');
                 titulo.innerText = 'El email debe contener una arroba @.';
+
             } else {
 
                 if (email === "hectorgarciajobs19@gmail.com") {
-                    console.log("Bienvenido Jefe");
                     titulo.classList.add('success');
                     titulo.innerText = "Bienvenido Jefe";
+
                 } else {
                     titulo.classList.add('error');
                     titulo.innerText = "Acceso Denegado: Solo personal autorizado";
