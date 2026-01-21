@@ -17,7 +17,7 @@
 
             <div class="input-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email" required>
             </div>
 
             <div class="input-group">
@@ -45,10 +45,19 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             
+            
+
             if (password.length < 6) {
                 alert('La contraseña debe tener al menos 6 caracteres.');
+            } else if   (!email.includes('@')) {
+                alert("¿El email no tiene una arroba @?");
             } else {
-                alert('Ingresando con: ' + email);
+
+                if (email === "hectorgarciajobs19@gmail.com") {
+                alert('Bienvenido Jefe ' + email);
+                } else {
+                alert("ERROR: Acceso Denegado: Solo personal autorizado");
+                }
             }
         });
         
