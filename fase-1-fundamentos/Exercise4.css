@@ -74,3 +74,11 @@ label {
     transform: scale(1.05);
     background-color: #011f41;
 }
+
+.error {
+    color: red;
+}
+
+.success {
+    color: green;
+}
