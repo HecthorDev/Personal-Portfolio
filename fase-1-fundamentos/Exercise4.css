@@ -86,3 +86,17 @@ label {
 .input-error {
     border: 2px solid red;
 }
+
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.eye-icon {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    user-select: none;
+}

@@ -20,9 +20,12 @@
                 <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email" required>
             </div>
 
-            <div class="input-group">
+            <div class="input-group password-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+                <div class="password-wrapper">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+                    <span id="togglePassword" class="eye-icon">👁️</span>
+                </div>
             </div>
 
             <div class="input-group checkbox-group">
@@ -76,6 +79,21 @@
                 }
             }
         });
+
+    const togglePassword = document.getElementById('togglePassword');
+    const pwdInput = document.getElementById('password'); 
+
+    togglePassword.addEventListener('click', function() {
+        const estaOculto = pwdInput.getAttribute('type') === 'password';
+        
+        if (estaOculto) {
+            pwdInput.setAttribute('type', 'text');
+            togglePassword.innerText = '🙈';
+        } else {
+            pwdInput.setAttribute('type', 'password');
+            togglePassword.innerText = '👁️';
+        }
+    });
 
     </script>
 
