@@ -47,6 +47,7 @@
             const email = emailInput.value;
             const password = passwordInput.value;
             const titulo = document.querySelector('.title');
+            const usuariosVip = ['hectorgarciajobs19@gmail.com', 'tu_email@gmail.com', 'socio@gmail.com', 'admin@google.com'];
             
             titulo.classList.remove('error');
             titulo.classList.remove('success');
@@ -65,7 +66,7 @@
 
             } else {
 
-                if (email === "hectorgarciajobs19@gmail.com") {
+                if (usuariosVip.includes(email)) {
                     titulo.classList.add('success');
                     titulo.innerText = "Bienvenido Jefe";
 
