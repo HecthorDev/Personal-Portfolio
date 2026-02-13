@@ -31,10 +31,10 @@ export default function About() {
                         />
                     </div>
                     {/* Decorative Elements */}
-                    <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-zinc-900 rounded-full flex items-center justify-center z-10 border-4 border-black">
+                    <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-primary rounded-full flex items-center justify-center z-10 border-4 border-black">
                         <div className="text-center">
-                            <span className="block text-4xl font-bold text-white">5+</span>
-                            <span className="text-xs text-zinc-500 uppercase tracking-wider font-bold">Years Exp.</span>
+                            <span className="block text-4xl font-bold text-white">1+</span>
+                            <span className="text-xs text-white uppercase tracking-wider font-bold">Years Exp.</span>
                         </div>
                     </div>
                 </motion.div>
