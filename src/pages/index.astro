@@ -1,0 +1,12 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar';
+import Hero from '../components/Hero';
+---
+
+<Layout title="Hector Garcia | Front-end Developer">
+	<Navbar client:load />
+	<main>
+		<Hero client:visible />
+	</main>
+</Layout>
