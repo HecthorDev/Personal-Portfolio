@@ -23,18 +23,18 @@ export default function About() {
                     transition={{ duration: 0.8 }}
                     className="flex-1 relative"
                 >
-                    <div className="relative w-[300px] h-[400px] md:w-[400px] md:h-[500px] rounded-[3rem] overflow-hidden bg-zinc-900 shadow-2xl">
+                    <div className="relative w-[300px] h-[400px] md:w-[400px] md:h-[500px] rounded-[3rem] bg-zinc-900 shadow-2xl">
                         <img
                             src="/Img/hector2.png"
                             alt="Hector Garcia - About"
-                            className="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-500"
+                            className="object-cover w-full h-full rounded-[3rem] grayscale hover:grayscale-0 transition-all duration-500"
                         />
-                    </div>
-                    {/* Decorative Elements */}
-                    <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-primary rounded-full flex items-center justify-center z-10 border-4 border-black">
-                        <div className="text-center">
-                            <span className="block text-4xl font-bold text-white">1+</span>
-                            <span className="text-xs text-white uppercase tracking-wider font-bold">Years Exp.</span>
+                        {/* Decorative Elements */}
+                        <div className="absolute -bottom-6 -right-6 w-40 h-40 bg-primary rounded-full flex items-center justify-center z-10 border-4 border-black shadow-lg">
+                            <div className="text-center drop-shadow-md">
+                                <span className="block text-4xl font-bold text-white mb-1">1+</span>
+                                <span className="text-xs text-white uppercase tracking-wider font-bold block">Years Exp.</span>
+                            </div>
                         </div>
                     </div>
                 </motion.div>
