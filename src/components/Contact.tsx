@@ -2,9 +2,6 @@ import { motion } from "framer-motion";
 import GlassCard from "./ui/GlassCard";
 import GlassInput from "./ui/GlassInput";
 import GlassButton from "./ui/GlassButton";
-import GlassCard from "./ui/GlassCard";
-import GlassInput from "./ui/GlassInput";
-import GlassButton from "./ui/GlassButton";
 
 export default function Contact() {
     return (

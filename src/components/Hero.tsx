@@ -70,7 +70,7 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="flex-1 flex justify-center relative"
+          className="hidden md:flex flex-1 justify-center relative"
         >
           <div className="relative w-[300px] h-[400px] md:w-[400px] md:h-[500px] rounded-[3rem] overflow-hidden bg-zinc-900 shadow-2xl shadow-primary/10">
             {/* Fallback or actual image */}

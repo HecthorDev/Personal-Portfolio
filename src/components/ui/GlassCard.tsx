@@ -5,15 +5,13 @@ import type { ReactNode } from "react";
 interface GlassCardProps {
     children: ReactNode;
     className?: string;
-    variant?: "clear" | "blue" | "green" | "pink";
+    variant?: "clear" | "green";
     isInteractive?: boolean;
 }
 
 const variantStyles = {
-    clear: "bg-glass border-glass-border",
-    blue: "bg-glass-ios-blue border-blue-400/20",
-    green: "bg-glass-ios-green border-green-400/20",
-    pink: "bg-glass-ios-pink border-pink-400/20",
+    clear: "bg-glass border-glass-border hover:border-primary/30", // Add hover green tint
+    green: "bg-primary/5 border-primary/20",
 };
 
 export default function GlassCard({
@@ -34,7 +32,7 @@ export default function GlassCard({
 
     return (
         <div
-            className={`group relative rounded-[38px] overflow-hidden ${variantStyles[variant]} backdrop-blur-liquid backdrop-saturate-[180%] backdrop-brightness-[1.05] shadow-[0_20px_50px_var(--glass-shadow)] transition-transform duration-500 hover:scale-[1.02] ${className}`}
+            className={`group relative rounded-[32px] overflow-hidden ${variantStyles[variant]} backdrop-blur-3xl backdrop-saturate-150 shadow-2xl transition-all duration-500 hover:scale-[1.01] ${className}`}
             onMouseMove={handleMouseMove}
         >
             {/* Dynamic Shine Effect */}
