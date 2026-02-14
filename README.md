@@ -17,6 +17,7 @@ This project was engineered using a modern, performance-first tech stack:
 ## ✨ Key Features
 
 -   **Performance First**: Achieves top-tier Lighthouse scores through Astro's island architecture.
+-   **Liquid Glass Design**: A premium, Apple-inspired "Liquid Glass" aesthetic (iOS 26 concept) featuring real-time light refraction, 3D tilt effects, and a "Pure Black & Green" color scheme.
 -   **Responsive Design**: Fully responsive layout that adapts seamlessly from mobile to 4K displays.
 -   **Interactive UI**: Engaging user experience with subtle animations and micro-interactions.
 -   **Clean Code**: Structured following best practices for scalability and maintainability.

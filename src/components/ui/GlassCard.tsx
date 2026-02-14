@@ -10,7 +10,7 @@ interface GlassCardProps {
 }
 
 const variantStyles = {
-    clear: "bg-glass border-glass-border hover:border-primary/30", // Add hover green tint
+    clear: "bg-white/5 border-white/10 hover:border-primary/30",
     green: "bg-primary/5 border-primary/20",
 };
 
@@ -52,8 +52,8 @@ export default function GlassCard({
             )}
 
             {/* Top Highlight Border (Simulating light hitting the edge) */}
-            <div className="absolute inset-0 rounded-[38px] ring-1 ring-inset ring-glass-highlight/20 pointer-events-none" />
-            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-glass-highlight/50 to-transparent opacity-50" />
+            <div className="absolute inset-0 rounded-[32px] ring-1 ring-inset ring-white/5 pointer-events-none" />
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-50" />
 
             {/* Content */}
             <div className="relative z-10">{children}</div>
