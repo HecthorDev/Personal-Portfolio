@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import GlassCard from "./ui/GlassCard";
 
 const services = [
     {
@@ -67,17 +68,18 @@ export default function Services() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
-                            className="bg-zinc-900/50 p-8 rounded-3xl border border-zinc-800 hover:border-primary/50 transition-all duration-300 hover:-translate-y-2 group"
                         >
-                            <div className="w-14 h-14 bg-zinc-800 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform group-hover:bg-primary group-hover:text-black">
-                                {service.icon}
-                            </div>
-                            <h3 className="text-xl font-bold text-white mb-4 group-hover:text-primary transition-colors">
-                                {service.title}
-                            </h3>
-                            <p className="text-zinc-400 leading-relaxed text-sm">
-                                {service.description}
-                            </p>
+                            <GlassCard className="h-full flex flex-col items-start p-8 hover:border-primary/50 group">
+                                <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform group-hover:bg-primary group-hover:text-black shadow-lg shadow-black/20">
+                                    {service.icon}
+                                </div>
+                                <h3 className="text-xl font-bold text-white mb-4 group-hover:text-primary transition-colors">
+                                    {service.title}
+                                </h3>
+                                <p className="text-zinc-400 leading-relaxed text-sm">
+                                    {service.description}
+                                </p>
+                            </GlassCard>
                         </motion.div>
                     ))}
                 </div>
