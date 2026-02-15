@@ -10,6 +10,7 @@ const projects = [
             "Developed a secret number game using HTML, CSS, and JavaScript. Focused on DOM manipulation and game logic.",
         image: "/Img/project1.png",
         tags: ["HTML", "CSS", "JS"],
+        link: "https://secret-number-game.vercel.app/"
     },
     {
         title: "Portfolio Responsive",
@@ -18,6 +19,7 @@ const projects = [
             "Personal responsive portfolio website built from scratch. Implements fluid layouts and CSS Grid/Flexbox.",
         image: "/Img/project2.png",
         tags: ["React", "Tailwind", "Framer"],
+        link: "https://portfolio-alura-eight-iota.vercel.app/"
     },
     {
         title: "Text Encryptor",
@@ -26,6 +28,15 @@ const projects = [
             "Web application for text encryption/decryption using a custom algorithm. Clean UI and instant feedback.",
         image: "/Img/project3.png",
         tags: ["JS", "Algorithm", "UI"],
+    },
+    {
+        title: "Org",
+        category: "Team Management",
+        description:
+            "React application to manage teams and collaborators. Features team creation, member registration, and dynamic organizational charts.",
+        image: "/Img/Project4.png",
+        tags: ["React", "CSS3", "UUID"],
+        link: "https://org-930f7xkpq-hector-garcias-projects.vercel.app/"
     },
 ];
 
@@ -54,17 +65,18 @@ export default function Projects() {
                     </motion.p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="flex overflow-x-auto pb-8 gap-8 snap-x snap-mandatory scrollbar-hide">
                     {projects.map((project, index) => (
                         <motion.div
                             key={index}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
+                            initial={{ opacity: 0, x: 50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
+                            className="flex-shrink-0 w-full md:w-[400px] snap-center"
                         >
-                            <GlassCard className="h-full flex flex-col p-0 overflow-hidden hover:scale-[1.01]">
-                                <div className="relative h-56 overflow-hidden bg-black/50 group">
+                            <GlassCard className="h-full flex flex-col p-0 overflow-hidden hover:scale-[1.01] transition-transform duration-300">
+                                <div className="relative h-64 overflow-hidden bg-black/50 group">
                                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10 opacity-60"></div>
                                     <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
 
@@ -102,7 +114,11 @@ export default function Projects() {
                                         {project.description}
                                     </p>
 
-                                    <GlassButton variant="primary" className="w-full justify-center group-hover:bg-primary group-hover:text-black transition-colors md:w-auto md:px-8 mx-auto block">
+                                    <GlassButton
+                                        variant="primary"
+                                        className="w-full justify-center group-hover:bg-primary group-hover:text-black transition-colors md:w-auto md:px-8 mx-auto block"
+                                        onClick={() => project.link && window.open(project.link, '_blank')}
+                                    >
                                         View Project
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
