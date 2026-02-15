@@ -102,7 +102,7 @@ export default function Projects() {
                                         {project.description}
                                     </p>
 
-                                    <GlassButton variant="primary" className="w-full justify-center group-hover:bg-primary group-hover:text-black transition-colors">
+                                    <GlassButton variant="primary" className="w-full justify-center group-hover:bg-primary group-hover:text-black transition-colors md:w-auto md:px-8 mx-auto block">
                                         View Project
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"

@@ -31,35 +31,11 @@ export default function Contact() {
                     <GlassCard className="p-8 md:p-12" variant="clear" isInteractive={false}>
                         <form className="space-y-6">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <GlassInput
-                                    label="Name"
-                                    id="name"
-                                    type="text"
-                                    placeholder="John Doe"
-                                />
-                                <GlassInput
-                                    label="Email"
-                                    id="email"
-                                    type="email"
-                                    placeholder="john@example.com"
-                                />
+                                <GlassInput label="Name" id="name" name="name" type="text" placeholder="John Doe" />
+                                <GlassInput label="Email" id="email" name="email" type="email" placeholder="john@example.com" />
                             </div>
 
-                            <div className="space-y-2">
-                                <label htmlFor="subject" className="text-zinc-400 text-sm font-medium ml-2">Subject</label>
-                                <div className="relative rounded-2xl overflow-hidden group">
-                                    <select
-                                        id="subject"
-                                        className="w-full bg-zinc-950/20 backdrop-blur-md border border-zinc-700/50 rounded-2xl px-6 py-4 text-white focus:outline-none focus:bg-zinc-900/40 transition-all appearance-none cursor-pointer shadow-inner"
-                                    >
-                                        <option value="" className="bg-zinc-900">Select a subject</option>
-                                        <option value="project" className="bg-zinc-900">Project Proposal</option>
-                                        <option value="freelance" className="bg-zinc-900">Freelance Work</option>
-                                        <option value="other" className="bg-zinc-900">Other</option>
-                                    </select>
-                                    <div className="absolute inset-0 rounded-2xl ring-1 ring-white/10 pointer-events-none group-focus-within:ring-primary/50 transition-colors duration-300" />
-                                </div>
-                            </div>
+                            <GlassInput label="Subject" id="subject" name="subject" type="text" placeholder="Select a subject" />
 
                             <div className="space-y-2">
                                 <label htmlFor="message" className="text-zinc-400 text-sm font-medium ml-2">Message</label>
@@ -74,13 +50,13 @@ export default function Contact() {
                                 </div>
                             </div>
 
-                            <GlassButton type="submit" variant="primary" className="w-full justify-center mt-4">
+                            <GlassButton type="submit" variant="primary" className="w-full md:w-auto md:px-12 mx-auto justify-center mt-6 block">
                                 Send Message
                             </GlassButton>
                         </form>
                     </GlassCard>
                 </motion.div>
             </div>
-        </section>
+        </section >
     );
 }

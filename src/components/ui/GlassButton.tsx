@@ -9,9 +9,9 @@ interface GlassButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>
 }
 
 const buttonVariants = {
-    primary: "bg-primary/20 hover:bg-primary/30 text-primary border-primary/20",
-    secondary: "bg-white/5 hover:bg-white/10 text-white border-white/10",
-    ghost: "bg-transparent hover:bg-white/5 text-zinc-300 hover:text-white border-transparent",
+    primary: "bg-primary text-black hover:bg-primary-dark border-transparent shadow-[0_0_20px_rgba(0,230,118,0.4)]", // Solid green for primary
+    secondary: "bg-white/5 hover:bg-white/10 text-white border-white/10 backdrop-blur-xl", // clean glass
+    ghost: "bg-transparent hover:bg-white/5 text-zinc-400 hover:text-white border-transparent",
 };
 
 export default function GlassButton({
