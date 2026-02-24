@@ -43,10 +43,10 @@ export default function Hero() {
           </p>
 
           <div className="flex flex-wrap justify-center gap-4 pt-4 sm:gap-6">
-            <a href="#contact" className="rounded-full bg-primary px-8 py-3.5 text-base font-bold text-black shadow-[0_0_20px_rgba(0,230,118,0.3)] transition hover:bg-primary-dark hover:shadow-[0_0_30px_rgba(0,230,118,0.6)] sm:px-10 sm:py-4 sm:text-lg">
+            <a href="#contact" className="inline-flex h-14 items-center justify-center rounded-full bg-[#1ED760] px-8 py-4 text-center text-sm font-bold uppercase leading-none tracking-[0.16em] text-white transition-colors duration-200 hover:bg-[#21e065] sm:px-10 md:px-12 md:text-base">
               {t("startProject")}
             </a>
-            <a href="#projects" className="rounded-full border border-primary/60 px-8 py-3.5 text-base font-bold text-primary transition hover:bg-primary/10 sm:px-10 sm:py-4 sm:text-lg">
+            <a href="#projects" className="inline-flex h-14 items-center justify-center rounded-full bg-[#1ED760] px-8 py-4 text-center text-sm font-bold uppercase leading-none tracking-[0.16em] text-white transition-colors duration-200 hover:bg-[#21e065] sm:px-10 md:px-12 md:text-base">
               {t("viewWork")}
             </a>
           </div>

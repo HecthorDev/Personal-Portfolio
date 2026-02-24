@@ -9,9 +9,9 @@ interface GlassButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>
 }
 
 const buttonVariants = {
-    primary: "bg-primary text-black hover:bg-primary-dark border-transparent shadow-[0_0_20px_rgba(0,230,118,0.4)]", // Solid green for primary
-    secondary: "bg-white/5 hover:bg-white/10 text-white border-white/10 backdrop-blur-xl", // clean glass
-    ghost: "bg-transparent hover:bg-white/5 text-zinc-400 hover:text-primary border-transparent",
+    primary: "bg-[#1ED760] text-white hover:bg-[#21e065]",
+    secondary: "bg-[#1ED760] text-white hover:bg-[#21e065]",
+    ghost: "bg-[#1ED760] text-white hover:bg-[#21e065]",
 };
 
 export default function GlassButton({
@@ -25,19 +25,17 @@ export default function GlassButton({
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className={`
-        relative px-6 py-3 rounded-2xl font-bold tracking-wide 
-        backdrop-blur-md transition-all duration-300
-        border shadow-[0_4px_14px_0_rgba(0,0,0,0.1)]
-        overflow-hidden group
+        inline-flex h-14 items-center justify-center rounded-full px-8 py-4 text-center text-sm font-bold uppercase leading-none tracking-[0.16em]
+        transition-colors duration-200 sm:px-10 md:px-12 md:text-base
+        disabled:cursor-not-allowed disabled:opacity-50
         ${buttonVariants[variant]} 
         ${className}
       `}
             {...props}
         >
-            {/* Shimmer Effect */}
-            <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/10 to-transparent z-0" />
-
-            <span className="relative z-10 flex items-center gap-2">{children}</span>
+            <span className="flex w-full items-center justify-center gap-2 text-center leading-none">
+                {children}
+            </span>
         </motion.button>
     );
 }

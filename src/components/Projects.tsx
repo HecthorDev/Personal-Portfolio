@@ -146,19 +146,21 @@ export default function Projects() {
                                             <div className="flex flex-1 flex-col p-6 sm:p-8">
                                                 <h4 className="mb-2 text-xs font-bold uppercase tracking-widest text-primary/80">{project.category}</h4>
                                                 <h3 className="mb-4 text-lg font-bold leading-tight text-white sm:text-xl">{project.title}</h3>
-                                                <p className="mb-8 flex-1 text-sm leading-relaxed text-zinc-400">{project.description}</p>
-                                                <GlassButton
-                                                    variant="primary"
-                                                    disabled={!project.link}
-                                                    className={`mx-auto block w-full justify-center transition-colors md:w-auto md:px-8 ${!project.link ? "cursor-not-allowed opacity-50" : "group-hover:bg-primary group-hover:text-black"}`}
-                                                    onClick={(event) => {
-                                                        event.stopPropagation();
-                                                        if (project.link) window.open(project.link, "_blank", "noopener,noreferrer");
-                                                    }}
-                                                >
-                                                    {project.link ? t("viewProject") : t("comingSoon")}
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></svg>
-                                                </GlassButton>
+                                                <p className="flex-1 text-sm leading-relaxed text-zinc-400">{project.description}</p>
+                                                <div className="mt-auto flex justify-center pt-6">
+                                                    <GlassButton
+                                                        variant="primary"
+                                                        disabled={!project.link}
+                                                        className={`h-14 w-full max-w-[230px] px-6 sm:px-8 ${!project.link ? "cursor-not-allowed opacity-50" : ""}`}
+                                                        onClick={(event) => {
+                                                            event.stopPropagation();
+                                                            if (project.link) window.open(project.link, "_blank", "noopener,noreferrer");
+                                                        }}
+                                                    >
+                                                        {project.link ? t("viewProject") : t("comingSoon")}
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></svg>
+                                                    </GlassButton>
+                                                </div>
                                             </div>
                                         </GlassCard>
                                     </div>

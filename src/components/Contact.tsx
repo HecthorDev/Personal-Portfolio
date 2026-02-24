@@ -41,7 +41,7 @@ export default function Contact() {
                                 </div>
                             </div>
 
-                            <GlassButton type="submit" variant="primary" className="mx-auto mt-6 block w-full justify-center md:w-auto md:px-12">
+                            <GlassButton type="submit" variant="primary" className="mx-auto mt-6 w-full md:w-auto">
                                 {t("sendMessage")}
                             </GlassButton>
                         </form>
