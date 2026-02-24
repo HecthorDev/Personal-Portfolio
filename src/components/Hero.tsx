@@ -83,16 +83,14 @@ export default function Hero() {
             />
           </div>
 
-          <motion.a
+          <a
             href="#about"
             aria-label="Scroll to discover"
-            className="mt-16 sm:mt-20 inline-flex flex-col items-center justify-center text-zinc-400 transition-all duration-300 hover:!text-primary hover:[filter:drop-shadow(0px_4px_15px_rgba(0,0,0,0.3))]"
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+            className="mt-16 sm:mt-20 inline-flex flex-col items-center justify-center text-zinc-400 transition-colors duration-300 hover:!text-primary hover:[filter:drop-shadow(0px_4px_15px_rgba(0,0,0,0.3))] animate-bounce"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="-mb-10"><path d="m6 9 6 6 6-6" /></svg>
             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6" /></svg>
-          </motion.a>
+          </a>
         </motion.div>
       </motion.div>
     </section>

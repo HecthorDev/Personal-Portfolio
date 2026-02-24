@@ -83,7 +83,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 px-5 py-2.5 sm:px-8 sm:py-3 md:px-10 lg:px-12 transition-colors duration-300 ${isScrolled ? "bg-black/15 backdrop-blur-xl" : "bg-transparent"}`}
+      className={`fixed top-0 left-0 w-full z-50 px-5 py-2.5 sm:px-8 sm:py-3 md:px-10 lg:px-12 transition-colors duration-300 ${isScrolled ? "bg-white/70 dark:bg-black/15 backdrop-blur-xl border-b border-zinc-200/80 dark:border-transparent" : "bg-transparent border-b border-transparent"}`}
     >
       <div className="relative flex w-full items-center">
         <div className="flex shrink-0 items-center gap-2">
