@@ -7,7 +7,7 @@ export default function Hero() {
   const contentY = useTransform(scrollY, [0, 420], [0, 110]);
   const contentOpacity = useTransform(scrollY, [0, 360], [1, 0.35]);
   const { t } = useLanguage();
-  const greetingParts = t("greeting").split(/([,.'’])/g);
+  const greetingParts = t("greeting").split(/([,.'`])/g);
 
   return (
     <section id="home" className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-black pb-16 pt-24">
@@ -15,7 +15,7 @@ export default function Hero() {
         <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} className="w-full max-w-6xl space-y-8 text-center lg:space-y-10">
           <h1 className="text-4xl font-black leading-tight tracking-tight sm:text-5xl lg:text-7xl xl:text-8xl">
             {greetingParts.map((part, index) => {
-              const isAccent = part === "," || part === "." || part === "'" || part === "’";
+              const isAccent = part === "," || part === "." || part === "'" || part === "`";
               return (
                 <span key={`${part}-${index}`} className={isAccent ? "text-primary" : "text-white"}>
                   {part}

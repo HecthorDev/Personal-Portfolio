@@ -1,13 +1,19 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { detectLanguage, LANGUAGE_STORAGE_KEY, saveLanguagePreference } from "./languageDetector";
-import { LANGUAGES, getTranslation, type SupportedLanguage, type TranslationKey } from "./translations";
+import { getTranslation, type SupportedLanguage, type TranslationKey } from "./translations";
 
 const LANGUAGE_CHANGE_EVENT = "portfolio-language-change";
+const LANGUAGE_OPTIONS = {
+    en: { code: "en", name: "English", nativeName: "English", flag: "GB", flagAsset: "https://flagcdn.com/w20/gb.png", dir: "ltr" },
+    es: { code: "es", name: "Espanol", nativeName: "Espanol", flag: "ES", flagAsset: "https://flagcdn.com/w20/es.png", dir: "ltr" },
+} as const;
+
+const isSupportedLanguage = (value: string): value is SupportedLanguage => value === "en" || value === "es";
 
 const applyDocumentLanguage = (lang: SupportedLanguage) => {
     if (typeof document === "undefined") return;
     document.documentElement.lang = lang;
-    document.documentElement.dir = LANGUAGES[lang].dir;
+    document.documentElement.dir = LANGUAGE_OPTIONS[lang].dir;
 };
 
 export function useLanguage() {
@@ -21,7 +27,7 @@ export function useLanguage() {
 
     useEffect(() => {
         const onStorage = (event: StorageEvent) => {
-            if (event.key !== LANGUAGE_STORAGE_KEY || !event.newValue || !(event.newValue in LANGUAGES)) return;
+            if (event.key !== LANGUAGE_STORAGE_KEY || !event.newValue || !isSupportedLanguage(event.newValue)) return;
             const nextLanguage = event.newValue as SupportedLanguage;
             setCurrentLang(nextLanguage);
             applyDocumentLanguage(nextLanguage);
@@ -51,7 +57,7 @@ export function useLanguage() {
 
     const t = useCallback((key: TranslationKey) => getTranslation(currentLang, key), [currentLang]);
 
-    const languages = useMemo(() => Object.values(LANGUAGES), []);
+    const languages = useMemo(() => Object.values(LANGUAGE_OPTIONS), []);
 
     return { currentLang, changeLanguage, t, languages };
 }

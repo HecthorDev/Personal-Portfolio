@@ -5,12 +5,12 @@
 				document.documentElement.setAttribute("data-theme", theme);
 				document.documentElement.classList.toggle("dark", theme === "dark");
 
-				const supportedLanguages = ["en", "es", "zh", "fr", "ar", "ru", "hi", "pt"];
+				const supportedLanguages = ["en", "es"];
 				const storedLang = localStorage.getItem("portfolio_lang");
 				const browserLang = (navigator.languages?.[0] ?? navigator.language ?? "en").toLowerCase().split("-")[0];
 				const lang = supportedLanguages.includes(storedLang ?? "") ? storedLang : supportedLanguages.includes(browserLang) ? browserLang : "en";
 				document.documentElement.lang = lang;
-				document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+				document.documentElement.dir = "ltr";
 			} catch {
 				document.documentElement.setAttribute("data-theme", "dark");
 				document.documentElement.classList.add("dark");
@@ -80,7 +80,7 @@
 					}
 				});
 			})();
-		</script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><link rel="stylesheet" href="/_astro/index.DOTETbgP.css"><script type="module" src="/_astro/hoisted.BScVxmeO.js"></script>
+		</script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><link rel="stylesheet" href="/_astro/index.4vp_N_T3.css"><script type="module" src="/_astro/hoisted.BScVxmeO.js"></script>
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 		var script = document.createElement('script');
 		script.defer = true;

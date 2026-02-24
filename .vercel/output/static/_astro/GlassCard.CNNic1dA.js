@@ -1,0 +1,7 @@
+import{j as r}from"./jsx-runtime.TBa3i5EZ.js";import{u}from"./use-motion-value.ZivhawS3.js";import{k as l,m as g}from"./proxy.Bfs8fsDR.js";import{u as b}from"./use-combine-values.CgdgmZv-.js";function v(n,...a){const i=n.length;function s(){let t="";for(let e=0;e<i;e++){t+=n[e];const o=a[e];o&&(t+=l(o)?o.get():o)}return t}return b(a.filter(l),s)}const f={clear:"bg-white/5 border-white/10 hover:border-primary/30",green:"bg-primary/5 border-primary/20"};function w({children:n,className:a="",variant:i="clear",isInteractive:s=!0}){const t=u(0),e=u(0),o=({currentTarget:p,clientX:d,clientY:c})=>{if(!s)return;const{left:m,top:x}=p.getBoundingClientRect();t.set(d-m),e.set(c-x)};return r.jsxs("div",{className:`group relative rounded-[32px] overflow-hidden ${f[i]} backdrop-blur-3xl backdrop-saturate-150 shadow-2xl transition-all duration-500 hover:scale-[1.01] ${a}`,onMouseMove:o,children:[s&&r.jsx(g.div,{className:"pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100",style:{background:v`
+              radial-gradient(
+                650px circle at ${t}px ${e}px,
+                rgba(255,255,255,0.15),
+                transparent 80%
+              )
+            `}}),r.jsx("div",{className:"absolute inset-0 rounded-[32px] ring-1 ring-inset ring-white/5 pointer-events-none"}),r.jsx("div",{className:"absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-50"}),r.jsx("div",{className:"relative z-10",children:n})]})}export{w as G};

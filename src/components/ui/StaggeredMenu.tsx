@@ -161,7 +161,7 @@ export default function StaggeredMenu({
                 ref={buttonRef}
                 type="button"
                 onClick={() => setOpen((prev) => !prev)}
-                aria-label={open ? "Close menu" : "Open menu"}
+                aria-label={open ? closeLabel : openLabel}
                 aria-expanded={open}
                 className="inline-flex h-9 appearance-none items-center rounded-full border-0 bg-transparent px-1.5 text-sm font-medium tracking-[0.01em] transition-colors hover:text-[var(--sm-accent)] focus-visible:outline-none"
                 style={{ color: buttonColor }}

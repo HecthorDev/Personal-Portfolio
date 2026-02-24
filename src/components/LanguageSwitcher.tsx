@@ -41,16 +41,13 @@ export default function LanguageSwitcher() {
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    strokeWidth="1.8"
+                    strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className={`h-4 w-4 transition-transform ${isOpen ? "scale-105 text-primary" : ""}`}
+                    className={`h-5 w-5 transition-transform ${isOpen ? "scale-105 text-primary" : ""}`}
                     aria-hidden="true"
                 >
-                    <circle cx="12" cy="12" r="9" />
-                    <path d="M3 12h18" />
-                    <path d="M12 3a15 15 0 0 1 0 18" />
-                    <path d="M12 3a15 15 0 0 0 0 18" />
+                    <path d="m10.5 21 5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 0 1 6-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 0 1-3.827-5.802" />
                 </svg>
             </button>
 
@@ -86,11 +83,8 @@ export default function LanguageSwitcher() {
                                                     draggable={false}
                                                     onError={(event) => {
                                                         event.currentTarget.style.display = "none";
-                                                        const fallback = event.currentTarget.nextElementSibling as HTMLSpanElement | null;
-                                                        if (fallback) fallback.style.display = "inline";
                                                     }}
                                                 />
-                                                <span className="hidden">{language.flag}</span>
                                                 <span>{language.name}</span>
                                             </button>
                                         </li>
