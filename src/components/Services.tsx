@@ -1,86 +1,97 @@
-import { motion } from "framer-motion";
+import { useMemo } from "react";
+import { useLanguage } from "../lib/i18n/useLanguage";
 import GlassCard from "./ui/GlassCard";
+import TiltedCard from "./ui/TiltedCard";
 
-const services = [
-    {
-        title: "Frontend Development",
-        description:
-            "React, TypeScript, Next.js, Tailwind CSS - building modern, performant UIs",
-        icon: (
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><line x1="3" y1="9" x2="21" y2="9" /><path d="m9 16 3-3 3 3" /></svg>
-        ),
-    },
-    {
-        title: "Full Stack Development",
-        description:
-            "React + Python/Node backend, scalable APIs, database design",
-        icon: (
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>
-        ),
-    },
-    {
-        title: "3D Web Experiences",
-        description:
-            "React Three Fiber, Three.js - immersive and interactive web apps",
-        icon: (
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" /><polyline points="3.29 7 12 12 20.71 7" /><line x1="12" y1="22" x2="12" y2="12" /></svg>
-        ),
-    },
-    {
-        title: "Mobile Development",
-        description:
-            "React Native, cross-platform apps, production optimization",
-        icon: (
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2" /><path d="M12 18h.01" /></svg>
-        ),
-    },
-];
+interface ServiceCard {
+    title: string;
+    subtitle: string;
+    description: string;
+    badge: string;
+    iconSrc: string;
+    accent: string;
+}
 
 export default function Services() {
+    const { t } = useLanguage();
+
+    const services = useMemo<ServiceCard[]>(
+        () => [
+            {
+                title: t("serviceUiTitle"),
+                subtitle: t("serviceUiSubtitle"),
+                description: t("serviceUiDescription"),
+                badge: t("serviceUiBadge"),
+                iconSrc: "https://img.icons8.com/fluency/240/web-design.png",
+                accent: "#00E676",
+            },
+            {
+                title: t("serviceFullStackTitle"),
+                subtitle: t("serviceFullStackSubtitle"),
+                description: t("serviceFullStackDescription"),
+                badge: t("serviceFullStackBadge"),
+                iconSrc: "https://img.icons8.com/fluency/240/source-code.png",
+                accent: "#6EE7B7",
+            },
+            {
+                title: t("serviceImmersiveTitle"),
+                subtitle: t("serviceImmersiveSubtitle"),
+                description: t("serviceImmersiveDescription"),
+                badge: t("serviceImmersiveBadge"),
+                iconSrc: "https://img.icons8.com/fluency/240/virtual-reality.png",
+                accent: "#22D3EE",
+            },
+            {
+                title: t("serviceMobileTitle"),
+                subtitle: t("serviceMobileSubtitle"),
+                description: t("serviceMobileDescription"),
+                badge: t("serviceMobileBadge"),
+                iconSrc: "https://img.icons8.com/fluency/240/smartphone-tablet.png",
+                accent: "#60A5FA",
+            },
+        ],
+        [t]
+    );
+
     return (
-        <section id="services" className="py-24 bg-black relative">
-            <div className="max-w-7xl mx-auto px-8 md:px-20 relative z-10">
-                <div className="text-center mb-16 space-y-4">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-4xl md:text-5xl font-bold text-white"
-                    >
-                        My <span className="text-primary">Services</span>
-                    </motion.h2>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
-                        className="text-zinc-400 max-w-2xl mx-auto"
-                    >
-                        Providing comprehensive solutions from initial design to final deployment.
-                    </motion.p>
+        <section id="services" className="relative bg-black py-20 sm:py-24">
+            <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 md:px-16 lg:px-20">
+                <div className="mb-10 space-y-4 text-center sm:mb-14">
+                    <h2 className="text-3xl font-bold text-white sm:text-4xl md:text-5xl">
+                        {t("servicesPrefix")} <span className="text-primary">{t("servicesHighlight")}</span>
+                    </h2>
+                    <p className="mx-auto max-w-3xl text-base text-zinc-400 sm:text-lg">{t("servicesIntro")}</p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {services.map((service, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                        >
-                            <GlassCard className="h-full flex flex-col items-start p-8 hover:border-primary/50 group">
-                                <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform group-hover:bg-primary group-hover:text-black shadow-lg shadow-black/20">
-                                    {service.icon}
-                                </div>
-                                <h3 className="text-xl font-bold text-white mb-4 group-hover:text-primary transition-colors">
-                                    {service.title}
-                                </h3>
-                                <p className="text-zinc-400 leading-relaxed text-sm">
-                                    {service.description}
-                                </p>
-                            </GlassCard>
-                        </motion.div>
+                <div className="grid grid-cols-1 gap-5 sm:gap-7 md:grid-cols-2">
+                    {services.map((service) => (
+                        <div key={service.title} className="h-full">
+                            <TiltedCard containerClassName="h-full" className="h-full" rotateAmplitude={10} scaleOnHover={1.02}>
+                                <GlassCard className="services-card-unified h-full overflow-hidden p-0">
+                                    <div className="flex items-center justify-between gap-3 px-5 pt-4 sm:px-6 sm:pt-5">
+                                        <span className="rounded-full border border-primary/35 bg-black/35 px-2.5 py-1 text-[11px] font-bold text-primary">{service.badge}</span>
+                                        <img
+                                            src={service.iconSrc}
+                                            alt=""
+                                            aria-hidden="true"
+                                            loading="lazy"
+                                            draggable={false}
+                                            onError={(event) => {
+                                                event.currentTarget.src = "https://img.icons8.com/fluency/240/code.png";
+                                            }}
+                                            className="h-14 w-14 object-contain sm:h-16 sm:w-16"
+                                            style={{ filter: `drop-shadow(0 8px 20px ${service.accent}44)` }}
+                                        />
+                                    </div>
+
+                                    <div className="px-5 pb-5 pt-3 sm:px-6 sm:pb-6 sm:pt-4">
+                                        <h4 className="mb-2 text-[11px] font-bold uppercase tracking-[0.18em] text-primary/85 sm:text-xs">{service.subtitle}</h4>
+                                        <h3 className="mb-3 text-xl font-bold leading-tight text-white sm:text-[1.7rem]">{service.title}</h3>
+                                        <p className="text-sm leading-relaxed text-zinc-400 sm:text-[0.96rem]">{service.description}</p>
+                                    </div>
+                                </GlassCard>
+                            </TiltedCard>
+                        </div>
                     ))}
                 </div>
             </div>

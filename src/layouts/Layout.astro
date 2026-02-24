@@ -18,13 +18,93 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<script is:inline>
+			try {
+				const storedTheme = localStorage.getItem("portfolio-theme");
+				const theme = storedTheme === "light" ? "light" : "dark";
+				document.documentElement.setAttribute("data-theme", theme);
+				document.documentElement.classList.toggle("dark", theme === "dark");
+
+				const supportedLanguages = ["en", "es", "zh", "fr", "ar", "ru", "hi", "pt"];
+				const storedLang = localStorage.getItem("portfolio_lang");
+				const browserLang = (navigator.languages?.[0] ?? navigator.language ?? "en").toLowerCase().split("-")[0];
+				const lang = supportedLanguages.includes(storedLang ?? "") ? storedLang : supportedLanguages.includes(browserLang) ? browserLang : "en";
+				document.documentElement.lang = lang;
+				document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+			} catch {
+				document.documentElement.setAttribute("data-theme", "dark");
+				document.documentElement.classList.add("dark");
+				document.documentElement.lang = "en";
+				document.documentElement.dir = "ltr";
+			}
+		</script>
+		<script is:inline>
+			(() => {
+				const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+				const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+
+				const getSectionFromHash = (hash) => {
+					if (!hash || hash === "#") return null;
+					const section = document.querySelector(hash);
+					return section instanceof HTMLElement ? section : null;
+				};
+
+				const centerSectionInViewport = (section, behavior = "smooth") => {
+					const rect = section.getBoundingClientRect();
+					const absoluteTop = window.scrollY + rect.top;
+					const centeredTop = absoluteTop + rect.height / 2 - window.innerHeight / 2;
+					const maxScrollTop = document.documentElement.scrollHeight - window.innerHeight;
+					const targetTop = clamp(centeredTop, 0, Math.max(0, maxScrollTop));
+
+					window.scrollTo({
+						top: targetTop,
+						behavior: prefersReducedMotion ? "auto" : behavior,
+					});
+				};
+
+				const navigateToHashCentered = (hash, behavior = "smooth") => {
+					const section = getSectionFromHash(hash);
+					if (!section) return;
+					centerSectionInViewport(section, behavior);
+				};
+
+				document.addEventListener("click", (event) => {
+					const target = event.target;
+					if (!(target instanceof Element)) return;
+
+					const link = target.closest('a[href^="#"]');
+					if (!(link instanceof HTMLAnchorElement)) return;
+
+					const hash = link.getAttribute("href") ?? "";
+					if (!hash || hash === "#") return;
+
+					const section = getSectionFromHash(hash);
+					if (!section) return;
+
+					event.preventDefault();
+
+					if (window.location.hash !== hash) {
+						history.pushState(null, "", hash);
+					}
+
+					centerSectionInViewport(section, "smooth");
+				});
+
+				window.addEventListener("hashchange", () => {
+					navigateToHashCentered(window.location.hash, "smooth");
+				});
+
+				window.addEventListener("load", () => {
+					if (window.location.hash) {
+						navigateToHashCentered(window.location.hash, "auto");
+					}
+				});
+			})();
+		</script>
 		<ViewTransitions />
 	</head>
 	<body class="bg-black text-white antialiased min-h-screen w-full overflow-x-hidden relative selection:bg-primary selection:text-black">
-        <!-- Ambient Background Orbs for Glass Refraction -->
-        <div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/20 blur-[120px] rounded-full pointer-events-none z-0 opacity-50"></div>
-        <div class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-500/10 blur-[120px] rounded-full pointer-events-none z-0 opacity-30"></div>
-        
 		<slot />
 	</body>
 </html>

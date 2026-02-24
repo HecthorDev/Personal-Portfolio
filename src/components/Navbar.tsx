@@ -1,22 +1,34 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useMemo, useState } from "react";
+import LanguageSwitcher from "./LanguageSwitcher";
+import StaggeredMenu from "./ui/StaggeredMenu";
+import { useLanguage } from "../lib/i18n/useLanguage";
+import type { TranslationKey } from "../lib/i18n/translations";
 
 interface NavLink {
-  name: string;
+  translationKey: Extract<TranslationKey, "navHome" | "navAbout" | "navServices" | "navProjects" | "navContact">;
   href: string;
 }
 
+type ThemeMode = "dark" | "light";
+
 const navLinks: NavLink[] = [
-  { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Services", href: "#services" },
-  { name: "Projects", href: "#projects" },
-  { name: "Contact", href: "#contact" },
+  { translationKey: "navHome", href: "#home" },
+  { translationKey: "navAbout", href: "#about" },
+  { translationKey: "navServices", href: "#services" },
+  { translationKey: "navProjects", href: "#projects" },
+  { translationKey: "navContact", href: "#contact" },
 ];
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [theme, setTheme] = useState<ThemeMode>("dark");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { t } = useLanguage();
+
+  const applyTheme = (nextTheme: ThemeMode) => {
+    document.documentElement.setAttribute("data-theme", nextTheme);
+    document.documentElement.classList.toggle("dark", nextTheme === "dark");
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,83 +39,118 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuOpen]);
+
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("portfolio-theme");
+    const initialTheme: ThemeMode = storedTheme === "light" ? "light" : "dark";
+    applyTheme(initialTheme);
+    setTheme(initialTheme);
+  }, []);
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => {
+      const nextTheme: ThemeMode = prevTheme === "dark" ? "light" : "dark";
+      applyTheme(nextTheme);
+      localStorage.setItem("portfolio-theme", nextTheme);
+      return nextTheme;
+    });
+  };
+
+  const menuItems = useMemo(
+    () =>
+      navLinks.map((link) => ({
+        label: t(link.translationKey),
+        link: link.href,
+        ariaLabel: t(link.translationKey),
+      })),
+    [t]
+  );
+
+  const socialItems = useMemo(
+    () => [
+      { label: "GitHub", link: "https://github.com/HecthorDev" },
+      { label: "LinkedIn", link: "https://linkedin.com" },
+      { label: "X", link: "https://x.com/HecthorDev" },
+    ],
+    []
+  );
+
   return (
-    <header className="fixed top-0 left-0 w-full z-50 py-6 px-8 flex justify-between items-center bg-transparent">
-      {/* Logo */}
-      <a href="#home" className="text-3xl font-black text-white tracking-tighter">
-        HG<span className="text-primary">.</span>
-      </a>
-
-      {/* Desktop Navigation (Center Pill) */}
-      <div className={`hidden md:flex items-center gap-8 px-8 py-3 rounded-full transition-all duration-300 ${isScrolled ? "bg-zinc-900/80 backdrop-blur-md border border-zinc-800" : "bg-transparent"}`}>
-        {navLinks.map((link) => (
-          <a
-            key={link.name}
-            href={link.href}
-            className="text-sm font-medium text-zinc-400 hover:text-white transition-colors relative group"
-          >
-            {link.name}
-            {/* Active/Hover Indicator could go here */}
+    <header
+      className={`fixed top-0 left-0 w-full z-50 px-5 py-2.5 sm:px-8 sm:py-3 md:px-10 lg:px-12 transition-colors duration-300 ${isScrolled ? "bg-black/15 backdrop-blur-xl" : "bg-transparent"}`}
+    >
+      <div className="grid w-full grid-cols-[1fr_auto_1fr] items-center">
+        <div className="flex items-center gap-2">
+          <a href="#home" className="text-2xl sm:text-3xl font-black text-white tracking-tighter">
+            HG<span className="text-primary">.</span>
           </a>
-        ))}
-      </div>
-
-      {/* CTA Button */}
-      <div className="hidden md:block">
-        <a
-          href="#contact"
-          className="px-6 py-2 bg-primary text-black font-bold rounded-full hover:bg-primary-dark transition-colors shadow-[0_0_15px_rgba(0,230,118,0.4)]"
-        >
-          Hire Me
-        </a>
-      </div>
-
-      {/* Mobile Menu Button */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="md:hidden text-white hover:text-primary transition-colors focus:outline-none"
-        aria-label={isOpen ? "Close menu" : "Open menu"}
-      >
-        {isOpen ? (
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        ) : (
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        )}
-      </button>
-
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute top-24 left-4 right-4 bg-zinc-900 border border-zinc-800 rounded-2xl p-6 md:hidden flex flex-col gap-4 shadow-2xl"
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className={`inline-flex h-9 w-9 appearance-none items-center justify-center rounded-full border-0 bg-transparent transition-colors hover:text-primary active:text-primary focus-visible:text-primary focus-visible:outline-none ${
+              theme === "dark" ? "text-zinc-200" : "text-neutral-900"
+            }`}
+            aria-label={theme === "dark" ? t("enableLightTheme") : t("enableDarkTheme")}
+            title={theme === "dark" ? t("enableLightTheme") : t("enableDarkTheme")}
           >
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="text-center text-lg text-zinc-300 hover:text-primary font-medium py-2"
-              >
-                {link.name}
-              </a>
-            ))}
+            {theme === "dark" ? (
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3a6 6 0 1 0 9 9 9 9 0 1 1-9-9z" /></svg>
+            )}
+          </button>
+        </div>
+
+        <nav className="hidden lg:flex items-center justify-center gap-8">
+          {navLinks.map((link) => (
             <a
-              href="#contact"
-              onClick={() => setIsOpen(false)}
-              className="bg-primary text-black font-bold py-3 rounded-full text-center hover:bg-primary-dark transition-colors"
+              key={link.translationKey}
+              href={link.href}
+              className="text-sm font-medium text-zinc-500 transition-colors hover:text-primary dark:text-zinc-400"
             >
-              Hire Me
+              {t(link.translationKey)}
             </a>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          ))}
+        </nav>
+
+        <div className="flex items-center justify-end gap-1">
+          <div className="hidden lg:block">
+            <LanguageSwitcher />
+          </div>
+
+          <div className="lg:hidden">
+            <LanguageSwitcher />
+          </div>
+
+          <div className="lg:hidden">
+            <StaggeredMenu
+              position="right"
+              items={menuItems}
+              socialItems={socialItems}
+              displaySocials
+              displayItemNumbering
+              isFixed
+              closeOnClickAway
+              changeMenuColorOnOpen
+              accentColor="#00E676"
+              colors={theme === "dark" ? ["#111111", "#1A1A1A"] : ["#FFFFFF", "#F4F4F5"]}
+              menuButtonColor={theme === "dark" ? "#FFFFFF" : "#111111"}
+              openMenuButtonColor={theme === "dark" ? "#FFFFFF" : "#111111"}
+              openLabel={t("menuOpen")}
+              closeLabel={t("menuClose")}
+              socialsLabel={t("socialsLabel")}
+              onMenuOpen={() => setIsMobileMenuOpen(true)}
+              onMenuClose={() => setIsMobileMenuOpen(false)}
+            />
+          </div>
+        </div>
+      </div>
     </header>
   );
 }

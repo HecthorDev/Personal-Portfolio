@@ -1,147 +1,177 @@
-import { motion } from "framer-motion";
-import GlassCard from "./ui/GlassCard";
+import { animate, motion, useAnimationFrame, useMotionValue } from "framer-motion";
+import { useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
+import { useLanguage } from "../lib/i18n/useLanguage";
 import GlassButton from "./ui/GlassButton";
+import GlassCard from "./ui/GlassCard";
 
-const projects = [
-    {
-        title: "Secret Number Game",
-        category: "Juego del numero secreto!",
-        description:
-            "Developed a secret number game using HTML, CSS, and JavaScript. Focused on DOM manipulation and game logic.",
-        image: "/Img/project1.png",
-        tags: ["HTML", "CSS", "JS"],
-        link: "https://secret-number-game.vercel.app/"
-    },
-    {
-        title: "Portfolio Responsive",
-        category: "Eleve tu negocio digital",
-        description:
-            "Personal responsive portfolio website built from scratch. Implements fluid layouts and CSS Grid/Flexbox.",
-        image: "/Img/project2.png",
-        tags: ["React", "Tailwind", "Framer"],
-        link: "https://portfolio-alura-eight-iota.vercel.app/"
-    },
-    {
-        title: "Text Encryptor",
-        category: "Text Encryptor",
-        description:
-            "Web application for text encryption/decryption using a custom algorithm. Clean UI and instant feedback.",
-        image: "/Img/project3.png",
-        tags: ["JS", "Algorithm", "UI"],
-    },
-    {
-        title: "Org",
-        category: "Team Management",
-        description:
-            "React application to manage teams and collaborators. Features team creation, member registration, and dynamic organizational charts.",
-        image: "/Img/Project4.png",
-        tags: ["React", "CSS3", "UUID"],
-        link: "https://org-930f7xkpq-hector-garcias-projects.vercel.app/"
-    },
-];
+const AUTO_SCROLL_SPEED = 55;
+const MANUAL_STEP = 340;
+
+function wrapLoop(value: number, min: number, max: number) {
+    const range = max - min;
+    if (range === 0) return min;
+    const wrapped = ((((value - min) % range) + range) % range) + min;
+    return wrapped;
+}
 
 export default function Projects() {
+    const viewportRef = useRef<HTMLDivElement | null>(null);
+    const firstSetRef = useRef<HTMLDivElement | null>(null);
+    const x = useMotionValue(0);
+    const [loopWidth, setLoopWidth] = useState(0);
+    const [isPaused, setIsPaused] = useState(false);
+    const { t } = useLanguage();
+
+    const projects = useMemo(
+        () => [
+            {
+                title: t("project1Title"),
+                category: t("project1Category"),
+                description: t("project1Description"),
+                image: "/Img/project1.png",
+                tags: ["HTML", "CSS", "JS"],
+                link: "https://secret-number-game.vercel.app/",
+            },
+            {
+                title: t("project2Title"),
+                category: t("project2Category"),
+                description: t("project2Description"),
+                image: "/Img/project2.png",
+                tags: ["React", "Tailwind", "Framer"],
+                link: "https://portfolio-alura-eight-iota.vercel.app/",
+            },
+            {
+                title: t("project3Title"),
+                category: t("project3Category"),
+                description: t("project3Description"),
+                image: "/Img/project3.png",
+                tags: ["JS", "Algorithm", "UI"],
+            },
+            {
+                title: t("project4Title"),
+                category: t("project4Category"),
+                description: t("project4Description"),
+                image: "/Img/Project4.png",
+                tags: ["React", "CSS3", "UUID"],
+                link: "https://org-930f7xkpq-hector-garcias-projects.vercel.app/",
+            },
+        ],
+        [t]
+    );
+
+    const duplicatedProjects = useMemo(() => [projects, projects], [projects]);
+
+    useEffect(() => {
+        const measure = () => {
+            const width = firstSetRef.current?.scrollWidth ?? 0;
+            setLoopWidth(width);
+            if (width > 0) x.set(wrapLoop(x.get(), -width, 0));
+        };
+
+        measure();
+        window.addEventListener("resize", measure);
+        return () => window.removeEventListener("resize", measure);
+    }, [x, projects.length]);
+
+    useAnimationFrame((_, delta) => {
+        if (isPaused || loopWidth === 0) return;
+        const nextX = x.get() - (AUTO_SCROLL_SPEED * delta) / 1000;
+        x.set(wrapLoop(nextX, -loopWidth, 0));
+    });
+
+    const shiftCarousel = (direction: "next" | "prev") => {
+        if (loopWidth === 0) return;
+        const step = direction === "next" ? -MANUAL_STEP : MANUAL_STEP;
+        const targetX = wrapLoop(x.get() + step, -loopWidth, 0);
+        setIsPaused(true);
+        animate(x, targetX, { type: "spring", stiffness: 170, damping: 26, mass: 0.4 });
+    };
+
+    const handleCardClick = (event: MouseEvent<HTMLDivElement>) => {
+        if (!viewportRef.current) return;
+        const cardRect = event.currentTarget.getBoundingClientRect();
+        const viewportRect = viewportRef.current.getBoundingClientRect();
+        const cardCenter = cardRect.left + cardRect.width / 2;
+        const viewportCenter = viewportRect.left + viewportRect.width / 2;
+        shiftCarousel(cardCenter >= viewportCenter ? "next" : "prev");
+    };
+
     return (
-        <section id="projects" className="py-24 bg-black relative">
-            <div className="max-w-7xl mx-auto px-8 md:px-20">
-                <div className="text-center mb-16 space-y-4">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-4xl md:text-5xl font-bold text-white"
-                    >
-                        Featured <span className="text-primary">Projects</span>
-                    </motion.h2>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
-                        className="text-zinc-400 max-w-2xl mx-auto"
-                    >
-                        A selection of my recent work, ranging from simple web games to
-                        complex frontend architectures.
-                    </motion.p>
+        <section id="projects" className="relative bg-black py-20 sm:py-24 lg:flex lg:min-h-screen lg:items-center lg:py-0">
+            <div className="w-full">
+                <div className="mx-auto max-w-7xl px-5 sm:px-8 md:px-16 lg:px-20">
+                    <div className="mb-8 space-y-4 text-center sm:mb-10">
+                        <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-3xl font-bold text-white sm:text-4xl md:text-5xl">
+                            {t("projectsPrefix")} <span className="text-primary">{t("projectsHighlight")}</span>
+                        </motion.h2>
+                        <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="mx-auto max-w-2xl text-zinc-400">
+                            {t("projectsIntro")}
+                        </motion.p>
+                    </div>
                 </div>
 
-                <div className="flex overflow-x-auto pb-8 gap-8 snap-x snap-mandatory scrollbar-hide">
-                    {projects.map((project, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, x: 50 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            className="flex-shrink-0 w-full md:w-[400px] snap-center"
-                        >
-                            <GlassCard className="h-full flex flex-col p-0 overflow-hidden hover:scale-[1.01] transition-transform duration-300">
-                                <div className="relative h-64 overflow-hidden bg-black/50 group">
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10 opacity-60"></div>
-                                    <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+                <div ref={viewportRef} className="relative w-full overflow-x-hidden overflow-y-visible" onMouseEnter={() => setIsPaused(true)} onMouseLeave={() => setIsPaused(false)}>
+                    <div className="pointer-events-none absolute bottom-0 left-0 top-0 z-20 w-16 bg-gradient-to-r from-black to-transparent sm:w-24" />
+                    <div className="pointer-events-none absolute bottom-0 right-0 top-0 z-20 w-16 bg-gradient-to-l from-black to-transparent sm:w-24" />
 
-                                    {/* Fallback pattern if image missing */}
-                                    <div className="w-full h-full flex items-center justify-center text-zinc-700 relative">
-                                        <img
-                                            src={project.image}
-                                            alt={project.title}
-                                            className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out"
-                                            onError={(e) => {
-                                                e.currentTarget.style.display = 'none';
-                                                e.currentTarget.nextElementSibling?.classList.remove('hidden');
-                                            }}
-                                        />
-                                        <div className="hidden w-full h-full flex items-center justify-center bg-zinc-900">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="opacity-20"><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><circle cx="9" cy="9" r="2" /><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" /></svg>
-                                        </div>
+                    <motion.div style={{ x }} className="flex w-max px-5 py-6 sm:px-8 md:px-12 lg:px-16">
+                        {duplicatedProjects.map((group, groupIndex) => (
+                            <div key={groupIndex} ref={groupIndex === 0 ? firstSetRef : undefined} className="flex gap-5 pr-5 sm:gap-7 sm:pr-7">
+                                {group.map((project, index) => (
+                                    <div key={`${groupIndex}-${project.title}-${index}`} className="w-[80vw] cursor-pointer select-none sm:w-[420px] lg:w-[440px]" onClick={handleCardClick}>
+                                        <GlassCard className="flex h-full flex-col overflow-hidden p-0 transition-transform duration-300 hover:scale-[1.01]">
+                                            <div className="group relative h-56 overflow-hidden bg-black/50 sm:h-64">
+                                                <div className="absolute inset-0 z-10 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+                                                <div className="absolute inset-0 z-10 bg-primary/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                                                <div className="relative flex h-full w-full items-center justify-center text-zinc-700">
+                                                    <img
+                                                        src={project.image}
+                                                        alt={project.title}
+                                                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                                                        draggable={false}
+                                                        onError={(event) => {
+                                                            event.currentTarget.style.display = "none";
+                                                            event.currentTarget.nextElementSibling?.classList.remove("hidden");
+                                                        }}
+                                                    />
+                                                    <div className="hidden h-full w-full items-center justify-center bg-zinc-900">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="opacity-20"><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><circle cx="9" cy="9" r="2" /><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" /></svg>
+                                                    </div>
+                                                </div>
+                                                <div className="absolute left-4 top-4 z-20">
+                                                    <span className="rounded-full border border-primary/20 bg-black/60 px-3 py-1 text-xs font-bold text-primary backdrop-blur-md">{project.tags[0]}</span>
+                                                </div>
+                                            </div>
+
+                                            <div className="flex flex-1 flex-col p-6 sm:p-8">
+                                                <h4 className="mb-2 text-xs font-bold uppercase tracking-widest text-primary/80">{project.category}</h4>
+                                                <h3 className="mb-4 text-lg font-bold leading-tight text-white sm:text-xl">{project.title}</h3>
+                                                <p className="mb-8 flex-1 text-sm leading-relaxed text-zinc-400">{project.description}</p>
+                                                <GlassButton
+                                                    variant="primary"
+                                                    disabled={!project.link}
+                                                    className={`mx-auto block w-full justify-center transition-colors md:w-auto md:px-8 ${!project.link ? "cursor-not-allowed opacity-50" : "group-hover:bg-primary group-hover:text-black"}`}
+                                                    onClick={(event) => {
+                                                        event.stopPropagation();
+                                                        if (project.link) window.open(project.link, "_blank", "noopener,noreferrer");
+                                                    }}
+                                                >
+                                                    {project.link ? t("viewProject") : t("comingSoon")}
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></svg>
+                                                </GlassButton>
+                                            </div>
+                                        </GlassCard>
                                     </div>
+                                ))}
+                            </div>
+                        ))}
+                    </motion.div>
+                </div>
 
-                                    <div className="absolute top-4 left-4 z-20">
-                                        <span className="px-3 py-1 bg-black/60 text-primary text-xs font-bold rounded-full backdrop-blur-md border border-primary/20">
-                                            {project.tags[0]}
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div className="p-8 flex-1 flex flex-col">
-                                    <h4 className="text-primary/80 text-xs font-bold mb-2 uppercase tracking-widest">
-                                        {project.category}
-                                    </h4>
-                                    <h3 className="text-xl font-bold text-white mb-4 leading-tight">
-                                        {project.title}
-                                    </h3>
-                                    <p className="text-zinc-400 text-sm leading-relaxed mb-8 flex-1">
-                                        {project.description}
-                                    </p>
-
-                                    <GlassButton
-                                        variant="primary"
-                                        className="w-full justify-center group-hover:bg-primary group-hover:text-black transition-colors md:w-auto md:px-8 mx-auto block"
-                                        onClick={() => project.link && window.open(project.link, '_blank')}
-                                    >
-                                        View Project
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="16"
-                                            height="16"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            className="ml-2 group-hover:translate-x-1 transition-transform"
-                                        >
-                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                                            <polyline points="15 3 21 3 21 9" />
-                                            <line x1="10" y1="14" x2="21" y2="3" />
-                                        </svg>
-                                    </GlassButton>
-
-                                </div>
-                            </GlassCard>
-                        </motion.div>
-                    ))}
+                <div className="mx-auto mt-4 max-w-7xl px-5 sm:px-8 md:px-16 lg:px-20">
+                    <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center text-xs uppercase tracking-[0.2em] text-zinc-500">
+                        {isPaused ? t("paused") : t("autoScrollActive")}
+                    </motion.h2>
                 </div>
             </div>
         </section>

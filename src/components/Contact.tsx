@@ -1,62 +1,53 @@
 import { motion } from "framer-motion";
+import { useLanguage } from "../lib/i18n/useLanguage";
+import GlassButton from "./ui/GlassButton";
 import GlassCard from "./ui/GlassCard";
 import GlassInput from "./ui/GlassInput";
-import GlassButton from "./ui/GlassButton";
 
 export default function Contact() {
+    const { t } = useLanguage();
+
     return (
-        <section id="contact" className="py-24 bg-black relative">
-            <div className="max-w-4xl mx-auto px-8">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-16"
-                >
-                    <span className="text-primary font-bold tracking-wider text-sm uppercase">Get in Touch</span>
-                    <h2 className="text-4xl md:text-5xl font-bold text-white mt-2 mb-6">
-                        Let's work <span className="text-primary">together</span>
+        <section id="contact" className="relative bg-black py-20 sm:py-24">
+            <div className="mx-auto max-w-4xl px-5 sm:px-8 md:px-12">
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12 text-center sm:mb-16">
+                    <span className="text-sm font-bold uppercase tracking-wider text-primary">{t("contactEyebrow")}</span>
+                    <h2 className="mt-2 mb-6 text-3xl font-bold text-white sm:text-4xl md:text-5xl">
+                        {t("contactPrefix")} <span className="text-primary">{t("contactHighlight")}</span>
                     </h2>
-                    <p className="text-zinc-400">
-                        Have a project in mind? Fill out the form below or send me an email.
-                    </p>
+                    <p className="text-zinc-400">{t("contactIntro")}</p>
                 </motion.div>
 
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2 }}
-                >
-                    <GlassCard className="p-8 md:p-12" variant="clear" isInteractive={false}>
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
+                    <GlassCard className="p-5 sm:p-8 md:p-12" variant="clear" isInteractive={false}>
                         <form className="space-y-6">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <GlassInput label="Name" id="name" name="name" type="text" placeholder="John Doe" />
-                                <GlassInput label="Email" id="email" name="email" type="email" placeholder="john@example.com" />
+                            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                                <GlassInput label={t("labelName")} id="name" name="name" type="text" placeholder={t("placeholderName")} />
+                                <GlassInput label={t("labelEmail")} id="email" name="email" type="email" placeholder={t("placeholderEmail")} />
                             </div>
 
-                            <GlassInput label="Subject" id="subject" name="subject" type="text" placeholder="Select a subject" />
+                            <GlassInput label={t("labelSubject")} id="subject" name="subject" type="text" placeholder={t("placeholderSubject")} />
 
                             <div className="space-y-2">
-                                <label htmlFor="message" className="text-zinc-400 text-sm font-medium ml-2">Message</label>
-                                <div className="relative rounded-2xl overflow-hidden group">
+                                <label htmlFor="message" className="ml-2 text-sm font-medium text-zinc-400">{t("labelMessage")}</label>
+                                <div className="group relative overflow-hidden rounded-2xl">
                                     <textarea
                                         id="message"
                                         rows={4}
-                                        className="w-full bg-zinc-950/20 backdrop-blur-md border border-zinc-700/50 rounded-2xl px-6 py-4 text-white focus:outline-none focus:bg-zinc-900/40 transition-all placeholder-zinc-600 resize-none shadow-inner"
-                                        placeholder="Tell me about your project..."
+                                        className="w-full resize-none rounded-2xl border border-zinc-700/50 bg-zinc-950/20 px-6 py-4 text-white shadow-inner backdrop-blur-md transition-all placeholder-zinc-600 focus:bg-zinc-900/40 focus:outline-none"
+                                        placeholder={t("placeholderMessage")}
                                     />
-                                    <div className="absolute inset-0 rounded-2xl ring-1 ring-white/10 pointer-events-none group-focus-within:ring-primary/50 transition-colors duration-300" />
+                                    <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-white/10 transition-colors duration-300 group-focus-within:ring-primary/50" />
                                 </div>
                             </div>
 
-                            <GlassButton type="submit" variant="primary" className="w-full md:w-auto md:px-12 mx-auto justify-center mt-6 block">
-                                Send Message
+                            <GlassButton type="submit" variant="primary" className="mx-auto mt-6 block w-full justify-center md:w-auto md:px-12">
+                                {t("sendMessage")}
                             </GlassButton>
                         </form>
                     </GlassCard>
                 </motion.div>
             </div>
-        </section >
+        </section>
     );
 }
