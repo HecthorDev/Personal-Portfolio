@@ -86,7 +86,7 @@ export default function Hero() {
           <motion.a
             href="#about"
             aria-label="Scroll to discover"
-            className="mt-16 sm:mt-20 inline-flex flex-col items-center justify-center text-zinc-400 transition-colors hover:text-primary"
+            className="hero-arrow mt-16 sm:mt-20 inline-flex flex-col items-center justify-center text-zinc-400 transition-all duration-300 hover:text-primary"
             animate={{ y: [0, 10, 0] }}
             transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
           >

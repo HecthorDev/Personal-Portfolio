@@ -97,7 +97,7 @@ export default function Navbar() {
             <a
               key={link.translationKey}
               href={link.href}
-              className="text-sm font-medium text-zinc-500 transition-colors hover:text-primary dark:text-zinc-400"
+              className="nav-link text-sm font-medium text-zinc-500 transition-colors hover:text-primary dark:text-zinc-400"
             >
               {t(link.translationKey)}
             </a>
@@ -108,9 +108,8 @@ export default function Navbar() {
           <button
             type="button"
             onClick={toggleTheme}
-            className={`inline-flex h-9 w-9 appearance-none items-center justify-center rounded-full border-0 bg-transparent transition-colors hover:text-primary active:text-primary focus-visible:text-primary focus-visible:outline-none ${
-              theme === "dark" ? "text-zinc-200" : "text-neutral-900"
-            }`}
+            className={`inline-flex h-9 w-9 appearance-none items-center justify-center rounded-full border-0 bg-transparent transition-colors hover:text-primary active:text-primary focus-visible:text-primary focus-visible:outline-none ${theme === "dark" ? "text-zinc-200" : "text-neutral-900"
+              }`}
             aria-label={theme === "dark" ? t("enableLightTheme") : t("enableDarkTheme")}
             title={theme === "dark" ? t("enableLightTheme") : t("enableDarkTheme")}
           >

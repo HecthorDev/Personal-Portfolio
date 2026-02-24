@@ -4,6 +4,10 @@ export default {
     content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
     theme: {
         extend: {
+            fontFamily: {
+                sans: ['"Geist Sans"', 'system-ui', 'sans-serif'],
+                mono: ['"Geist Mono"', 'monospace'],
+            },
             colors: {
                 background: '#0a0a0a',
                 primary: '#00e676',
