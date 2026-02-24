@@ -69,7 +69,7 @@ export default function Hero() {
             </StarBorder>
           </div>
 
-          <div className="mt-50 mb-5 w-[100vw] relative left-1/2 -translate-x-1/2">
+          <div className="mt-40 mb-4 w-[100vw] relative left-1/2 -translate-x-1/2">
             <LogoLoop
               logos={techLogos}
               speed={80}
@@ -83,10 +83,16 @@ export default function Hero() {
             />
           </div>
 
-          <a href="#about" aria-label="Scroll to discover" className="mt-16 sm:mt-20 inline-flex flex-col items-center justify-center text-zinc-400 transition-colors hover:text-primary animate-bounce">
+          <motion.a
+            href="#about"
+            aria-label="Scroll to discover"
+            className="mt-16 sm:mt-20 inline-flex flex-col items-center justify-center text-zinc-400 transition-colors hover:text-primary"
+            animate={{ y: [0, 10, 0] }}
+            transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+          >
             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="-mb-10"><path d="m6 9 6 6 6-6" /></svg>
             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6" /></svg>
-          </a>
+          </motion.a>
         </motion.div>
       </motion.div>
     </section>
