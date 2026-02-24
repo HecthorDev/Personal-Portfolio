@@ -42,7 +42,7 @@ export default function Contact() {
                             </div>
 
                             <div className="mx-auto mt-6 flex justify-center w-full md:w-auto">
-                                <StarBorder as="button" type="submit" className="h-12 w-full max-w-[200px] px-6 text-sm font-bold uppercase tracking-widest whitespace-nowrap">
+                                <StarBorder as="button" type="submit" className="h-12 w-full max-w-[200px] px-6 text-sm font-bold uppercase tracking-widest whitespace-nowrap !text-black dark:!text-white hover:!text-primary hover:[text-shadow:0_4px_15px_rgba(0,0,0,0.3)] dark:hover:[text-shadow:none]">
                                     {t("sendMessage")}
                                 </StarBorder>
                             </div>

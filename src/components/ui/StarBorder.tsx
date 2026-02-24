@@ -43,7 +43,7 @@ const StarBorder = <T extends React.ElementType = 'button'>({
                     animationDuration: speed
                 }}
             ></div>
-            <div className="starborder-inner relative z-1 h-full w-full bg-white dark:bg-zinc-950/90 border border-zinc-200 dark:border-zinc-800 text-black dark:text-white transition-all duration-300 flex items-center justify-center text-[16px] py-[16px] px-[26px] rounded-[20px]">
+            <div className="relative z-1 h-full w-full bg-white dark:bg-zinc-950/90 border border-zinc-200 dark:border-zinc-800 text-black dark:text-white group-hover:text-[var(--primary,#00e676)] dark:group-hover:text-[var(--primary,#00e676)] group-hover:[text-shadow:0px_4px_15px_rgba(0,0,0,0.15)] dark:group-hover:[text-shadow:none] transition-all duration-300 flex items-center justify-center text-[16px] py-[16px] px-[26px] rounded-[20px] hover:bg-zinc-100 dark:hover:bg-zinc-900/50">
                 {children}
             </div>
         </Component>

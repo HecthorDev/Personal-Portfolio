@@ -118,42 +118,11 @@ html[data-theme="light"] [class*="border-zinc-900"] {
     border-color: rgba(24, 24, 27, 0.22) !important;
 }
 
-html[data-theme="light"] .text-primary {
+html[data-theme="light"] .text-primary,
+html[data-theme="light"] .hover\:text-primary:hover,
+html[data-theme="light"] .hover\:\!text-primary:hover,
+html[data-theme="light"] .group:hover .group-hover\:text-primary {
     text-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3) !important;
-}
-
-.nav-link:hover {
-    color: #00e676 !important;
-}
-
-html[data-theme="light"] .nav-link:hover {
-    text-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3) !important;
-}
-
-.hero-arrow:hover {
-    color: #00e676 !important;
-}
-
-html[data-theme="light"] .hero-arrow:hover {
-    filter: drop-shadow(0px 4px 15px rgba(0, 0, 0, 0.3)) !important;
-}
-
-.footer-social:hover {
-    background-color: #00e676 !important;
-    color: #000 !important;
-}
-
-html[data-theme="light"] .footer-social:hover {
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3) !important;
-}
-
-.group:hover .starborder-inner {
-    background-color: #00e676 !important;
-    border-color: #00e676 !important;
-}
-
-html[data-theme="light"] .group:hover .starborder-inner {
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3) !important;
 }
 
 .hover\:text-white:hover {

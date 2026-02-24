@@ -97,7 +97,7 @@ export default function Navbar() {
             <a
               key={link.translationKey}
               href={link.href}
-              className="nav-link text-sm font-medium text-zinc-500 transition-colors hover:text-primary dark:text-zinc-400"
+              className="text-sm font-medium text-zinc-500 transition-colors hover:!text-primary hover:[text-shadow:0px_4px_15px_rgba(0,0,0,0.25)] dark:text-zinc-400 dark:hover:[text-shadow:none]"
             >
               {t(link.translationKey)}
             </a>
