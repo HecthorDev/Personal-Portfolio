@@ -1,1 +1,0 @@
-import{u as n}from"./use-motion-value.ZivhawS3.js";import{b as c,d as f,f as p}from"./proxy.Bfs8fsDR.js";function l(a,s){const t=n(s()),e=()=>t.set(s());return e(),c(()=>{const r=()=>p.preRender(e,!1,!0),u=a.map(o=>o.on("change",r));return()=>{u.forEach(o=>o()),f(e)}}),t}export{l as u};

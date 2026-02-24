@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "../lib/i18n/useLanguage";
-import GlassButton from "./ui/GlassButton";
+import StarBorder from "./ui/StarBorder";
 import GlassCard from "./ui/GlassCard";
 import GlassInput from "./ui/GlassInput";
 
@@ -41,9 +41,11 @@ export default function Contact() {
                                 </div>
                             </div>
 
-                            <GlassButton type="submit" variant="primary" className="mx-auto mt-6 w-full md:w-auto">
-                                {t("sendMessage")}
-                            </GlassButton>
+                            <div className="mx-auto mt-6 flex justify-center w-full md:w-auto">
+                                <StarBorder as="button" type="submit" className="h-12 w-full max-w-[200px] px-6 text-sm font-bold uppercase tracking-widest whitespace-nowrap">
+                                    {t("sendMessage")}
+                                </StarBorder>
+                            </div>
                         </form>
                     </GlassCard>
                 </motion.div>
