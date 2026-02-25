@@ -90,8 +90,8 @@ export default function Navbar() {
     >
       <div className="relative flex w-full items-center">
         <div className="flex shrink-0 items-center gap-2">
-          <a href="#home" className="flex items-center justify-center w-10 h-10 rounded-lg bg-[#22C55E] text-2xl font-bold tracking-tighter text-black hover:opacity-90 transition-opacity">
-            HG
+          <a href="#home" className="text-2xl sm:text-3xl font-black text-white tracking-tighter">
+            HG<span className="text-primary">.</span>
           </a>
         </div>
 
