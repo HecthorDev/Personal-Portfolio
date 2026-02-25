@@ -72,20 +72,20 @@ export default function Contact() {
     };
 
     return (
-        <section id="contact" className="relative bg-black py-20 sm:py-24">
+        <section id="contact" className="relative bg-black py-16 sm:py-20">
             <div className="mx-auto max-w-3xl px-5 sm:px-8 md:px-12">
-                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12 text-center sm:mb-16">
-                    <span className="text-sm font-bold uppercase tracking-wider text-primary">{t("contactEyebrow")}</span>
-                    <h2 className="mt-2 mb-6 text-3xl font-bold text-white sm:text-4xl md:text-5xl">
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-8 text-center sm:mb-12">
+                    <span className="text-xs font-bold uppercase tracking-wider text-primary">{t("contactEyebrow")}</span>
+                    <h2 className="mt-2 mb-4 text-3xl font-bold text-white sm:text-4xl md:text-5xl">
                         {t("contactPrefix")} <span className="text-primary">{t("contactHighlight")}</span>
                     </h2>
-                    <p className="text-zinc-400">{t("contactIntro")}</p>
+                    <p className="text-zinc-400 text-sm">{t("contactIntro")}</p>
                 </motion.div>
 
-                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
-                    <GlassCard className="p-5 sm:p-8 md:p-12" variant="clear" isInteractive={false}>
-                        <form ref={form} onSubmit={handleSubmit} className="space-y-6">
-                            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
+                    <GlassCard className="p-5 sm:p-6 md:p-8" variant="clear" isInteractive={false}>
+                        <form ref={form} onSubmit={handleSubmit} className="space-y-4">
+                            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                                 <GlassInput
                                     label={t("labelName")}
                                     id="name"
@@ -125,7 +125,7 @@ export default function Contact() {
                                     <textarea
                                         id="message"
                                         name="message"
-                                        rows={4}
+                                        rows={3}
                                         required
                                         value={formData.message}
                                         onChange={handleChange}
@@ -136,27 +136,24 @@ export default function Contact() {
                                 </div>
                             </div>
 
-                            {/* RECAPTCHA THEMED */}
-                            <div className="flex justify-center pt-2">
-                                <div className="rounded-xl overflow-hidden ring-1 ring-white/10 shadow-lg bg-zinc-900/20 backdrop-blur-sm p-0 inline-block transition-colors">
+                            {/* RECAPTCHA & BUTTON */}
+                            <div className="mt-4 flex flex-col md:flex-row items-center justify-between gap-4 pt-2">
+                                <div className="rounded-xl overflow-hidden ring-1 ring-white/10 shadow-lg bg-zinc-900/20 backdrop-blur-sm p-0 flex-shrink-0 origin-center md:origin-left scale-[0.85] sm:scale-95 transition-colors">
                                     {isMounted && (
                                         <ReCAPTCHA
                                             ref={recaptchaRef}
-                                            sitekey="6LfRSNISAAAAAMfRc6rmKwWZbJQA2EdpoR2Rr0XA"
+                                            sitekey="6Lf523YsAAAAADI4-yiedg9VjivRWrhaO3nkGz-7"
                                             theme={theme}
                                         />
                                     )}
                                 </div>
+                                <button disabled={status === "loading"} type="submit" className={`h-12 w-full md:w-auto md:min-w-[200px] px-6 rounded-2xl bg-zinc-100 dark:bg-zinc-900 text-sm font-bold uppercase tracking-widest whitespace-nowrap text-black dark:text-white hover:!bg-primary hover:!text-black transition-all duration-300 flex-shrink-0 ${status === "loading" ? "opacity-50 cursor-not-allowed" : ""}`}>
+                                    {status === "loading" ? "Enviando..." : t("sendMessage")}
+                                </button>
                             </div>
 
                             {status === "success" && <p className="text-primary text-center text-sm font-medium">¡Mensaje enviado con éxito!</p>}
                             {status === "error" && <p className="text-red-400 text-center text-sm font-medium">Ocurrió un error. Inténtalo de nuevo más tarde o revisa el Captcha.</p>}
-
-                            <div className="mx-auto mt-4 flex justify-center w-full md:w-auto">
-                                <button disabled={status === "loading"} type="submit" className={`h-12 w-full px-6 rounded-2xl bg-zinc-100 dark:bg-zinc-900 text-sm font-bold uppercase tracking-widest whitespace-nowrap text-black dark:text-white hover:!bg-primary hover:!text-black transition-all duration-300 ${status === "loading" ? "opacity-50 cursor-not-allowed" : ""}`}>
-                                    {status === "loading" ? "Enviando..." : t("sendMessage")}
-                                </button>
-                            </div>
                         </form>
                     </GlassCard>
                 </motion.div>
