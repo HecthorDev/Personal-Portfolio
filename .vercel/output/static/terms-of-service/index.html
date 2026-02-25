@@ -1,7 +1,8 @@
 <!DOCTYPE html><html lang="en" class="scroll-smooth"> <head><meta charset="UTF-8"><meta name="description" content="Hector Garcia - Front-end Developer Portfolio"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v4.16.19"><title>Terms of Service | Hector Garcia</title><script>
 			try {
 				const storedTheme = localStorage.getItem("portfolio-theme");
-				const theme = storedTheme === "light" ? "light" : "dark";
+				const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+				const theme = storedTheme ? storedTheme : (prefersLight ? "light" : "dark");
 				document.documentElement.setAttribute("data-theme", theme);
 				document.documentElement.classList.toggle("dark", theme === "dark");
 
@@ -80,7 +81,7 @@
 					}
 				});
 			})();
-		</script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><link rel="stylesheet" href="/_astro/index.DxBiRNps.css"><script type="module" src="/_astro/hoisted.BScVxmeO.js"></script>
+		</script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><link rel="stylesheet" href="/_astro/index.B9sdoKTp.css"><script type="module" src="/_astro/hoisted.BScVxmeO.js"></script>
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 		var script = document.createElement('script');
 		script.defer = true;

@@ -163,7 +163,7 @@ export default function StaggeredMenu({
                 onClick={() => setOpen((prev) => !prev)}
                 aria-label={open ? closeLabel : openLabel}
                 aria-expanded={open}
-                className="inline-flex h-9 appearance-none items-center rounded-full border-0 bg-transparent px-1.5 text-sm font-medium tracking-[0.01em] transition-colors hover:text-[var(--sm-accent)] focus-visible:outline-none"
+                className="inline-flex h-9 appearance-none items-center rounded-full border-0 bg-transparent px-1.5 text-sm font-medium tracking-[0.01em] transition-colors hover:!text-[var(--sm-accent)] focus-visible:outline-none"
                 style={{ color: buttonColor }}
             >
                 <span>{openLabel}</span>
@@ -211,7 +211,7 @@ export default function StaggeredMenu({
                                         <button
                                             type="button"
                                             onClick={() => setOpen(false)}
-                                            className="inline-flex appearance-none items-center gap-2 border-0 bg-transparent text-base font-medium tracking-[0.01em] transition-colors hover:text-[var(--sm-accent)] focus-visible:outline-none"
+                                            className="inline-flex appearance-none items-center gap-2 border-0 bg-transparent text-base font-medium tracking-[0.01em] transition-colors hover:!text-[var(--sm-accent)] focus-visible:outline-none"
                                             style={{ color: panelTextColor }}
                                         >
                                             <span>{closeLabel}</span>
@@ -231,7 +231,7 @@ export default function StaggeredMenu({
                                                     href={item.link}
                                                     aria-label={item.ariaLabel}
                                                     onClick={() => setOpen(false)}
-                                                    className="group inline-flex w-fit items-start gap-2 text-[clamp(2.55rem,9vw,4.85rem)] font-semibold uppercase leading-[0.9] tracking-[-0.03em] transition-colors hover:text-[var(--sm-accent)] focus-visible:text-[var(--sm-accent)] focus-visible:outline-none"
+                                                    className="group inline-flex w-fit items-start gap-2 text-[clamp(2.55rem,9vw,4.85rem)] font-semibold uppercase leading-[0.9] tracking-[-0.03em] transition-colors hover:!text-[var(--sm-accent)] focus-visible:!text-[var(--sm-accent)] focus-visible:outline-none"
                                                     style={{ color: panelTextColor }}
                                                 >
                                                     <span className="block">{item.label}</span>
@@ -266,7 +266,7 @@ export default function StaggeredMenu({
                                                         href={social.link}
                                                         target="_blank"
                                                         rel="noreferrer"
-                                                        className="inline-flex text-[1.12rem] font-medium leading-none transition-colors hover:text-[var(--sm-accent)]"
+                                                        className="inline-flex text-[1.12rem] font-medium leading-none transition-colors hover:!text-[var(--sm-accent)]"
                                                         style={{ color: panelTextColor }}
                                                     >
                                                         {social.label}

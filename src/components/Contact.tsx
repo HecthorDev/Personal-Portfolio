@@ -99,6 +99,8 @@ function ContactFormContent() {
                                     required
                                     value={formData.name}
                                     onChange={handleChange}
+                                    onInvalid={(e) => e.currentTarget.setCustomValidity(t('contactIncomplete'))}
+                                    onInput={(e) => e.currentTarget.setCustomValidity('')}
                                     placeholder={t("placeholderName")}
                                 />
                                 <GlassInput
@@ -109,6 +111,8 @@ function ContactFormContent() {
                                     required
                                     value={formData.email}
                                     onChange={handleChange}
+                                    onInvalid={(e) => e.currentTarget.setCustomValidity(t('contactIncomplete'))}
+                                    onInput={(e) => e.currentTarget.setCustomValidity('')}
                                     placeholder={t("placeholderEmail")}
                                 />
                             </div>
@@ -121,6 +125,8 @@ function ContactFormContent() {
                                 required
                                 value={formData.subject}
                                 onChange={handleChange}
+                                onInvalid={(e) => e.currentTarget.setCustomValidity(t('contactIncomplete'))}
+                                onInput={(e) => e.currentTarget.setCustomValidity('')}
                                 placeholder={t("placeholderSubject")}
                             />
 
@@ -134,6 +140,8 @@ function ContactFormContent() {
                                         required
                                         value={formData.message}
                                         onChange={handleChange}
+                                        onInvalid={(e) => e.currentTarget.setCustomValidity(t('contactIncomplete'))}
+                                        onInput={(e) => e.currentTarget.setCustomValidity('')}
                                         className="w-full resize-none rounded-2xl border border-zinc-700/50 bg-zinc-950/20 px-6 py-4 text-white shadow-inner backdrop-blur-md transition-all placeholder-zinc-600 focus:bg-zinc-900/40 focus:outline-none"
                                         placeholder={t("placeholderMessage")}
                                     />
@@ -144,7 +152,7 @@ function ContactFormContent() {
                             {/* RECAPTCHA & BUTTON */}
                             <div className="mt-4 flex flex-col md:flex-row items-center justify-center gap-4 pt-2">
                                 <button disabled={status === "loading"} type="submit" className={`h-12 w-full md:w-auto md:min-w-[200px] px-6 rounded-2xl bg-zinc-100 dark:bg-zinc-900 text-sm font-bold uppercase tracking-widest whitespace-nowrap text-black dark:text-white hover:!bg-primary hover:!text-black transition-all duration-300 flex-shrink-0 ${status === "loading" ? "opacity-50 cursor-not-allowed" : ""}`}>
-                                    {status === "loading" ? "Enviando..." : t("sendMessage")}
+                                    {status === "loading" ? t("contactSending") : t("sendMessage")}
                                 </button>
                             </div>
 
@@ -152,8 +160,8 @@ function ContactFormContent() {
                                 This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" className="text-primary hover:underline">Privacy Policy</a> and <a href="https://policies.google.com/terms" className="text-primary hover:underline">Terms of Service</a> apply.
                             </p>
 
-                            {status === "success" && <p className="text-primary text-center text-sm font-medium">¡Mensaje enviado con éxito!</p>}
-                            {status === "error" && <p className="text-red-400 text-center text-sm font-medium">Ocurrió un error. Inténtalo de nuevo más tarde.</p>}
+                            {status === "success" && <p className="text-primary text-center text-sm font-medium">{t("contactSuccess")}</p>}
+                            {status === "error" && <p className="text-red-400 text-center text-sm font-medium">{t("contactError")}</p>}
                         </form>
                     </GlassCard>
                 </motion.div>

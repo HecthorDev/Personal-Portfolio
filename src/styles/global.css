@@ -14,7 +14,7 @@
 
 html[data-theme="light"] {
     --foreground-rgb: 10, 10, 10;
-    --background-rgb: 250, 250, 250;
+    --background-rgb: 255, 255, 255;
     --glass-bg: rgba(24, 24, 27, 0.04);
     --glass-border: rgba(24, 24, 27, 0.12);
     --glass-highlight: rgba(24, 24, 27, 0.06);
@@ -77,12 +77,12 @@ section[id]>* {
 }
 
 html[data-theme="light"] .bg-black {
-    background-color: #fafafa !important;
+    background-color: #ffffff !important;
 }
 
 html[data-theme="light"] .from-black {
-    --tw-gradient-from: #fafafa var(--tw-gradient-from-position) !important;
-    --tw-gradient-to: rgb(250 250 250 / 0) var(--tw-gradient-to-position) !important;
+    --tw-gradient-from: #ffffff var(--tw-gradient-from-position) !important;
+    --tw-gradient-to: rgb(255 255 255 / 0) var(--tw-gradient-to-position) !important;
 }
 
 html[data-theme="light"] .text-white {
@@ -120,8 +120,13 @@ html[data-theme="light"] [class*="border-zinc-900"] {
     border-color: rgba(24, 24, 27, 0.22) !important;
 }
 
-html[data-theme="light"] a[class*="hover:!text-black"]:hover,
-html[data-theme="light"] button[class*="hover:!text-black"]:hover {
+html[data-theme="light"] a[class*="hover:!text-primary"]:hover {
+    color: rgb(var(--color-primary)) !important;
+}
+
+html[data-theme="light"] a[class*="hover:!bg-primary"]:hover,
+html[data-theme="light"] button[class*="hover:!bg-primary"]:hover {
+    background-color: rgb(var(--color-primary)) !important;
     color: #000000 !important;
 }
 

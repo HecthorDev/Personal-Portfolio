@@ -69,7 +69,7 @@ export default function Services() {
                             <TiltedCard containerClassName="h-full" className="h-full" rotateAmplitude={10} scaleOnHover={1.02}>
                                 <GlassCard className="services-card-unified h-full overflow-hidden p-0">
                                     <div className="flex items-center justify-between gap-3 px-5 pt-4 sm:px-6 sm:pt-5">
-                                        <span className="rounded-full border border-primary/35 bg-black/35 px-2.5 py-1 text-[11px] font-bold text-primary">{service.badge}</span>
+                                        <span className="rounded-full border border-primary/35 bg-white dark:bg-black/35 px-2.5 py-1 text-[11px] font-bold text-primary">{service.badge}</span>
                                         <img
                                             src={service.iconSrc}
                                             alt=""

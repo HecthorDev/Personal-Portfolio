@@ -48,7 +48,10 @@ export default function Navbar() {
 
   useEffect(() => {
     const storedTheme = localStorage.getItem("portfolio-theme");
-    const initialTheme: ThemeMode = storedTheme === "light" ? "light" : "dark";
+    const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+    const initialTheme: ThemeMode = storedTheme === "light" || storedTheme === "dark"
+      ? storedTheme
+      : (prefersLight ? "light" : "dark");
     applyTheme(initialTheme);
     setTheme(initialTheme);
   }, []);
@@ -138,7 +141,7 @@ export default function Navbar() {
               isFixed
               closeOnClickAway
               changeMenuColorOnOpen
-              accentColor="#00E676"
+              accentColor={theme === "dark" ? "#00E676" : "#00a544"}
               colors={theme === "dark" ? ["#111111", "#1A1A1A"] : ["#FFFFFF", "#F4F4F5"]}
               menuButtonColor={theme === "dark" ? "#FFFFFF" : "#111111"}
               openMenuButtonColor={theme === "dark" ? "#FFFFFF" : "#111111"}
