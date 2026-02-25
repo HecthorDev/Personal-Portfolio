@@ -79,15 +79,15 @@ function ContactFormContent() {
     return (
         <section id="contact" className="relative bg-black py-16 sm:py-20">
             <div className="mx-auto max-w-3xl px-5 sm:px-8 md:px-12">
-                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-8 text-center sm:mb-12">
+                <div className="mb-8 text-center sm:mb-12">
                     <span className="text-xs font-bold uppercase tracking-wider text-primary">{t("contactEyebrow")}</span>
                     <h2 className="mt-2 mb-4 text-3xl font-bold text-white sm:text-4xl md:text-5xl">
                         {t("contactPrefix")} <span className="text-primary">{t("contactHighlight")}</span>
                     </h2>
                     <p className="text-zinc-400 text-sm">{t("contactIntro")}</p>
-                </motion.div>
+                </div>
 
-                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
+                <div>
                     <GlassCard className="p-5 sm:p-6 md:p-8" variant="clear" isInteractive={false}>
                         <form ref={form} onSubmit={handleSubmit} className="space-y-4">
                             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -164,7 +164,7 @@ function ContactFormContent() {
                             {status === "error" && <p className="text-red-400 text-center text-sm font-medium">{t("contactError")}</p>}
                         </form>
                     </GlassCard>
-                </motion.div>
+                </div>
             </div>
         </section>
     );

@@ -103,14 +103,14 @@ export default function Projects() {
     return (
         <section id="projects" className="relative bg-black py-20 sm:py-24 lg:flex lg:min-h-screen lg:items-center lg:py-0">
             <div className="w-full">
-                <div className="mx-auto max-w-7xl px-5 sm:px-8 md:px-16 lg:px-20">
+                <div className="mx-auto max-w-7xl px-5 sm:px-8 md:px-16 lg:px-20 text-white">
                     <div className="mb-8 space-y-4 text-center sm:mb-10">
-                        <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-3xl font-bold text-white sm:text-4xl md:text-5xl">
+                        <h2 className="text-3xl font-bold sm:text-4xl md:text-5xl">
                             {t("projectsPrefix")} <span className="text-primary">{t("projectsHighlight")}</span>
-                        </motion.h2>
-                        <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="mx-auto max-w-2xl text-zinc-400">
+                        </h2>
+                        <p className="mx-auto max-w-2xl text-zinc-400">
                             {t("projectsIntro")}
-                        </motion.p>
+                        </p>
                     </div>
                 </div>
 
@@ -181,9 +181,9 @@ export default function Projects() {
                 </div>
 
                 <div className="mx-auto mt-4 max-w-7xl px-5 sm:px-8 md:px-16 lg:px-20">
-                    <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center text-xs uppercase tracking-[0.2em] text-zinc-500">
+                    <h2 className="text-center text-xs uppercase tracking-[0.2em] text-zinc-500">
                         {isPaused ? t("paused") : t("autoScrollActive")}
-                    </motion.h2>
+                    </h2>
                 </div>
             </div>
         </section>

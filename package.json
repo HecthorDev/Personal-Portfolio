@@ -17,7 +17,7 @@
     "@fontsource/geist-mono": "^5.2.7",
     "@fontsource/geist-sans": "^5.2.5",
     "@types/react-google-recaptcha": "^2.1.9",
-    "astro": "^4.3.5",
+    "astro": "^4.16.18",
     "framer-motion": "^11.0.3",
     "geist": "^1.7.0",
     "google-recaptcha-v3": "^1.1.3",
