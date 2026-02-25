@@ -1,7 +1,6 @@
 import { animate, motion, useAnimationFrame, useMotionValue } from "framer-motion";
 import { useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
 import { useLanguage } from "../lib/i18n/useLanguage";
-import StarBorder from "./ui/StarBorder";
 import GlassCard from "./ui/GlassCard";
 
 const AUTO_SCROLL_SPEED = 55;
@@ -148,10 +147,9 @@ export default function Projects() {
                                                 <h3 className="mb-4 text-lg font-bold leading-tight text-white sm:text-xl">{project.title}</h3>
                                                 <p className="flex-1 text-sm leading-relaxed text-zinc-400">{project.description}</p>
                                                 <div className="mt-auto flex justify-center pt-6">
-                                                    <StarBorder
-                                                        as="button"
+                                                    <button
                                                         disabled={!project.link}
-                                                        className={`h-12 w-full max-w-[230px] px-6 sm:px-8 flex items-center justify-center whitespace-nowrap text-sm font-bold uppercase tracking-widest ${!project.link ? "cursor-not-allowed opacity-50" : ""}`}
+                                                        className={`h-12 w-full max-w-[230px] px-6 sm:px-8 flex items-center justify-center whitespace-nowrap text-sm font-bold uppercase tracking-widest rounded-[20px] bg-zinc-100 dark:bg-zinc-900 text-black dark:text-white transition-all duration-300 ${!project.link ? "cursor-not-allowed opacity-50" : "hover:!bg-primary hover:!text-black"}`}
                                                         onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
                                                             event.stopPropagation();
                                                             if (project.link) window.open(project.link, "_blank", "noopener,noreferrer");
@@ -161,7 +159,7 @@ export default function Projects() {
                                                             {project.link ? t("viewProject") : t("comingSoon")}
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></svg>
                                                         </span>
-                                                    </StarBorder>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </GlassCard>

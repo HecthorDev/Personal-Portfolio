@@ -1,16 +1,15 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useLanguage } from "../lib/i18n/useLanguage";
-import StarBorder from "./ui/StarBorder";
 import GlassCard from "./ui/GlassCard";
 import GlassInput from "./ui/GlassInput";
 import emailjs from '@emailjs/browser';
-import ReCAPTCHA from "react-google-recaptcha";
+import { GoogleReCaptchaProvider, useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
-export default function Contact() {
+function ContactFormContent() {
     const { t } = useLanguage();
     const form = useRef<HTMLFormElement>(null);
-    const recaptchaRef = useRef<ReCAPTCHA>(null);
+    const { executeRecaptcha } = useGoogleReCaptcha();
 
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
     const [theme, setTheme] = useState<"dark" | "light">("dark");
@@ -46,16 +45,23 @@ export default function Contact() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        const recaptchaValue = recaptchaRef.current?.getValue();
-        if (!recaptchaValue) {
-            alert("Por favor, verifica el Captcha.");
+        if (!executeRecaptcha) {
+            console.warn("ReCAPTCHA no está listo aún");
+            setStatus("error");
             return;
         }
 
-        if (!form.current) return;
         setStatus("loading");
 
         try {
+            const token = await executeRecaptcha("submit_contact");
+            if (!token) {
+                setStatus("error");
+                return;
+            }
+
+            if (!form.current) return;
+
             await emailjs.sendForm(
                 'service_z3vp9mf',
                 'template_r7v6fqb',
@@ -64,7 +70,6 @@ export default function Contact() {
             );
             setStatus("success");
             setFormData({ name: "", email: "", subject: "", message: "" });
-            recaptchaRef.current?.reset();
         } catch (error) {
             console.error(error);
             setStatus("error");
@@ -137,27 +142,30 @@ export default function Contact() {
                             </div>
 
                             {/* RECAPTCHA & BUTTON */}
-                            <div className="mt-4 flex flex-col md:flex-row items-center justify-between gap-4 pt-2">
-                                <div className="rounded-xl overflow-hidden ring-1 ring-white/10 shadow-lg bg-zinc-900/20 backdrop-blur-sm p-0 flex-shrink-0 origin-center md:origin-left scale-[0.85] sm:scale-95 transition-colors">
-                                    {isMounted && (
-                                        <ReCAPTCHA
-                                            ref={recaptchaRef}
-                                            sitekey="6Lf523YsAAAAADI4-yiedg9VjivRWrhaO3nkGz-7"
-                                            theme={theme}
-                                        />
-                                    )}
-                                </div>
+                            <div className="mt-4 flex flex-col md:flex-row items-center justify-end gap-4 pt-2">
                                 <button disabled={status === "loading"} type="submit" className={`h-12 w-full md:w-auto md:min-w-[200px] px-6 rounded-2xl bg-zinc-100 dark:bg-zinc-900 text-sm font-bold uppercase tracking-widest whitespace-nowrap text-black dark:text-white hover:!bg-primary hover:!text-black transition-all duration-300 flex-shrink-0 ${status === "loading" ? "opacity-50 cursor-not-allowed" : ""}`}>
                                     {status === "loading" ? "Enviando..." : t("sendMessage")}
                                 </button>
                             </div>
 
+                            <p className="text-zinc-500 text-[10px] text-center mt-4">
+                                This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" className="text-primary hover:underline">Privacy Policy</a> and <a href="https://policies.google.com/terms" className="text-primary hover:underline">Terms of Service</a> apply.
+                            </p>
+
                             {status === "success" && <p className="text-primary text-center text-sm font-medium">¡Mensaje enviado con éxito!</p>}
-                            {status === "error" && <p className="text-red-400 text-center text-sm font-medium">Ocurrió un error. Inténtalo de nuevo más tarde o revisa el Captcha.</p>}
+                            {status === "error" && <p className="text-red-400 text-center text-sm font-medium">Ocurrió un error. Inténtalo de nuevo más tarde.</p>}
                         </form>
                     </GlassCard>
                 </motion.div>
             </div>
         </section>
+    );
+}
+
+export default function Contact() {
+    return (
+        <GoogleReCaptchaProvider reCaptchaKey="6Lf523YsAAAAADI4-yiedg9VjivRWrhaO3nkGz-7">
+            <ContactFormContent />
+        </GoogleReCaptchaProvider>
     );
 }

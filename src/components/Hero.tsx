@@ -1,7 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useLanguage } from "../lib/i18n/useLanguage";
 import TextType from "./ui/TextType";
-import StarBorder from "./ui/StarBorder";
 import LogoLoop from "./ui/LogoLoop";
 
 const techLogos = [
@@ -61,12 +60,12 @@ export default function Hero() {
           </p>
 
           <div className="flex flex-wrap justify-center gap-4 pt-4 sm:gap-6">
-            <StarBorder as="a" href="#contact" className="inline-flex h-12 items-center justify-center px-6 py-2 text-center text-xs font-bold uppercase leading-none tracking-[0.16em] whitespace-nowrap sm:px-8 sm:h-14 sm:text-sm md:px-10 !text-black dark:!text-white hover:!text-primary hover:[text-shadow:0_4px_15px_rgba(0,0,0,0.3)] dark:hover:[text-shadow:none]">
+            <a href="#contact" className="inline-flex h-12 w-full sm:w-auto sm:h-14 min-w-[200px] items-center justify-center px-6 sm:px-8 py-2 text-center text-xs sm:text-sm font-bold uppercase tracking-widest whitespace-nowrap rounded-[20px] bg-zinc-100 dark:bg-zinc-900 text-black dark:text-white hover:!bg-primary hover:!text-black transition-all duration-300">
               {t("startProject")}
-            </StarBorder>
-            <StarBorder as="a" href="#projects" className="inline-flex h-12 items-center justify-center px-6 py-2 text-center text-xs font-bold uppercase leading-none tracking-[0.16em] whitespace-nowrap sm:px-8 sm:h-14 sm:text-sm md:px-10 !text-black dark:!text-white hover:!text-primary hover:[text-shadow:0_4px_15px_rgba(0,0,0,0.3)] dark:hover:[text-shadow:none]">
+            </a>
+            <a href="#projects" className="inline-flex h-12 w-full sm:w-auto sm:h-14 min-w-[200px] items-center justify-center px-6 sm:px-8 py-2 text-center text-xs sm:text-sm font-bold uppercase tracking-widest whitespace-nowrap rounded-[20px] bg-zinc-100 dark:bg-zinc-900 text-black dark:text-white hover:!bg-primary hover:!text-black transition-all duration-300">
               {t("viewWork")}
-            </StarBorder>
+            </a>
           </div>
 
           <div className="mt-40 mb-4 w-[100vw] relative left-1/2 -translate-x-1/2">
