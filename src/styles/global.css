@@ -179,3 +179,9 @@ html[data-theme="light"] .footer-glass {
         animation-play-state: paused;
     }
 }
+
+.grecaptcha-badge {
+    visibility: hidden !important;
+    opacity: 0 !important;
+    display: none !important;
+}
