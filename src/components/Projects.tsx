@@ -46,6 +46,7 @@ export default function Projects() {
                 description: t("project3Description"),
                 image: "/Img/project3.png",
                 tags: ["JS", "Algorithm", "UI"],
+                link: "https://hecthordev.github.io/Text-Encryptor/",
             },
             {
                 title: t("project4Title"),
@@ -54,6 +55,14 @@ export default function Projects() {
                 image: "/Img/Project4.png",
                 tags: ["React", "CSS3", "UUID"],
                 link: "https://org-rho-seven.vercel.app/",
+            },
+            {
+                title: t("project5Title"),
+                category: t("project5Category"),
+                description: t("project5Description"),
+                image: "/Img/Project5.png",
+                tags: ["React", "Styled", "Vite"],
+                link: "https://challege-aluraflix.vercel.app/",
             },
         ],
         [t]
@@ -125,7 +134,7 @@ export default function Projects() {
                                 {group.map((project, index) => (
                                     <div key={`${groupIndex}-${project.title}-${index}`} className="w-[80vw] sm:w-[350px] lg:w-[380px]">
                                         <GlassCard className="flex h-full flex-col overflow-hidden p-0 transition-transform duration-300 hover:scale-[1.01]">
-                                            <div className="group relative h-56 overflow-hidden bg-black/50 sm:h-64">
+                                            <div className="group relative h-48 overflow-hidden bg-black/50 sm:h-56">
                                                 <div className="absolute inset-0 z-10 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
                                                 <div className="absolute inset-0 z-10 bg-primary/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                                                 <div className="relative flex h-full w-full items-center justify-center text-zinc-700">
@@ -148,16 +157,16 @@ export default function Projects() {
                                                 </div>
                                             </div>
 
-                                            <div className="flex flex-1 flex-col p-6 sm:p-8">
+                                            <div className="flex flex-1 flex-col p-5 sm:p-6">
                                                 <h4 className="mb-2 text-xs font-bold uppercase tracking-widest text-primary/80">{project.category}</h4>
-                                                <h3 className="mb-4 text-lg font-bold leading-tight text-white sm:text-xl">{project.title}</h3>
-                                                <p className="flex-1 text-sm leading-relaxed text-zinc-400">{project.description}</p>
-                                                <div className="mt-auto flex justify-center pt-6">
+                                                <h3 className="mb-3 text-lg font-bold leading-tight text-white sm:text-xl">{project.title}</h3>
+                                                <p className="mb-4 line-clamp-3 text-sm leading-relaxed text-zinc-400" style={{ minHeight: '3.75rem' }}>{project.description}</p>
+                                                <div className="mt-auto flex justify-center border-t border-white/5 pt-5">
                                                     <a
                                                         href={project.link || "#"}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
-                                                        className={`h-12 w-full max-w-[230px] px-6 sm:px-8 flex items-center justify-center whitespace-nowrap text-sm font-bold uppercase tracking-widest rounded-[20px] bg-zinc-100 dark:bg-zinc-900 text-black dark:text-white transition-all duration-300 ${!project.link ? "cursor-not-allowed opacity-50" : "hover:!bg-primary hover:!text-black"}`}
+                                                        className={`h-11 w-full max-w-[210px] px-6 flex items-center justify-center whitespace-nowrap text-sm font-bold uppercase tracking-widest rounded-[20px] bg-zinc-100 dark:bg-zinc-900 text-black dark:text-white transition-all duration-300 ${!project.link ? "cursor-not-allowed opacity-50" : "hover:!bg-primary hover:!text-black"}`}
                                                         onClick={(event: React.MouseEvent<HTMLAnchorElement>) => {
                                                             if (!project.link) {
                                                                 event.preventDefault();
