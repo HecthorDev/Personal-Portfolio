@@ -142,7 +142,7 @@ function ContactFormContent() {
                             </div>
 
                             {/* RECAPTCHA & BUTTON */}
-                            <div className="mt-4 flex flex-col md:flex-row items-center justify-end gap-4 pt-2">
+                            <div className="mt-4 flex flex-col md:flex-row items-center justify-center gap-4 pt-2">
                                 <button disabled={status === "loading"} type="submit" className={`h-12 w-full md:w-auto md:min-w-[200px] px-6 rounded-2xl bg-zinc-100 dark:bg-zinc-900 text-sm font-bold uppercase tracking-widest whitespace-nowrap text-black dark:text-white hover:!bg-primary hover:!text-black transition-all duration-300 flex-shrink-0 ${status === "loading" ? "opacity-50 cursor-not-allowed" : ""}`}>
                                     {status === "loading" ? "Enviando..." : t("sendMessage")}
                                 </button>

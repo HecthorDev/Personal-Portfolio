@@ -92,7 +92,12 @@ export default function Projects() {
         const viewportRect = viewportRef.current.getBoundingClientRect();
         const cardCenter = cardRect.left + cardRect.width / 2;
         const viewportCenter = viewportRect.left + viewportRect.width / 2;
-        shiftCarousel(cardCenter >= viewportCenter ? "next" : "prev");
+        const offset = cardCenter - viewportCenter;
+
+        if (loopWidth === 0 || offset === 0) return;
+        const targetX = wrapLoop(x.get() - offset, -loopWidth, 0);
+        setIsPaused(true);
+        animate(x, targetX, { type: "spring", stiffness: 170, damping: 26, mass: 0.4 });
     };
 
     return (
@@ -117,7 +122,7 @@ export default function Projects() {
                         {duplicatedProjects.map((group, groupIndex) => (
                             <div key={groupIndex} ref={groupIndex === 0 ? firstSetRef : undefined} className="flex gap-5 pr-5 sm:gap-7 sm:pr-7">
                                 {group.map((project, index) => (
-                                    <div key={`${groupIndex}-${project.title}-${index}`} className="w-[80vw] cursor-pointer select-none sm:w-[420px] lg:w-[440px]" onClick={handleCardClick}>
+                                    <div key={`${groupIndex}-${project.title}-${index}`} className="w-[80vw] cursor-pointer select-none sm:w-[350px] lg:w-[380px]" onClick={handleCardClick}>
                                         <GlassCard className="flex h-full flex-col overflow-hidden p-0 transition-transform duration-300 hover:scale-[1.01]">
                                             <div className="group relative h-56 overflow-hidden bg-black/50 sm:h-64">
                                                 <div className="absolute inset-0 z-10 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />

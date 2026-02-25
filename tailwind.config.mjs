@@ -10,7 +10,7 @@ export default {
             },
             colors: {
                 background: '#0a0a0a',
-                primary: '#00e676',
+                primary: 'rgb(var(--color-primary) / <alpha-value>)',
                 'primary-dark': '#00c853',
                 glass: {
                     DEFAULT: 'var(--glass-bg)',

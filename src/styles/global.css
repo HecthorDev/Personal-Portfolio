@@ -9,6 +9,7 @@
     --glass-border: rgba(255, 255, 255, 0.08);
     --glass-highlight: rgba(255, 255, 255, 0.05);
     --glass-shadow: rgba(0, 230, 118, 0.05);
+    --color-primary: 0 230 118;
 }
 
 html[data-theme="light"] {
@@ -18,6 +19,7 @@ html[data-theme="light"] {
     --glass-border: rgba(24, 24, 27, 0.12);
     --glass-highlight: rgba(24, 24, 27, 0.06);
     --glass-shadow: rgba(0, 230, 118, 0.12);
+    --color-primary: 0 165 68;
 }
 
 .liquid-glass-gpu {
@@ -118,32 +120,9 @@ html[data-theme="light"] [class*="border-zinc-900"] {
     border-color: rgba(24, 24, 27, 0.22) !important;
 }
 
-html[data-theme="light"] .text-primary {
-    text-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-html[data-theme="light"] a[class*="hover:!text-primary"]:hover,
-html[data-theme="light"] button[class*="hover:!text-primary"]:hover,
-html[data-theme="light"] a[class*="hover:text-primary"]:hover,
-html[data-theme="light"] button[class*="hover:text-primary"]:hover,
-html[data-theme="light"] .group:hover [class*="group-hover:text-primary"] {
-    color: #00e676 !important;
-    text-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3) !important;
-}
-
-html[data-theme="light"] a[class*="hover:!bg-primary"]:hover,
-html[data-theme="light"] button[class*="hover:!bg-primary"]:hover {
-    background-color: #00e676 !important;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3) !important;
-}
-
 html[data-theme="light"] a[class*="hover:!text-black"]:hover,
 html[data-theme="light"] button[class*="hover:!text-black"]:hover {
     color: #000000 !important;
-}
-
-.hover\:text-white:hover {
-    color: #02c265 !important;
 }
 
 .services-card-unified {
