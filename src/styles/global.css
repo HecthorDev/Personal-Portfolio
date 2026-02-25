@@ -159,8 +159,13 @@ html[data-theme="light"] .footer-glass {
 }
 
 @keyframes scroll-infinite {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
 }
 
 .animate-scroll-fallback {
@@ -169,6 +174,8 @@ html[data-theme="light"] .footer-glass {
     width: max-content;
 }
 
-.animate-scroll-fallback:hover {
-    animation-play-state: paused;
+@media (hover: hover) {
+    .animate-scroll-fallback:hover {
+        animation-play-state: paused;
+    }
 }
