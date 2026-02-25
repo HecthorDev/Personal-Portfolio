@@ -29,7 +29,7 @@ export default function Projects() {
                 description: t("project1Description"),
                 image: "/Img/project1.png",
                 tags: ["HTML", "CSS", "JS"],
-                link: "https://secret-number-game.vercel.app/",
+                link: "https://hecthordev.github.io/Secret-Number-Alura-LATAM/",
             },
             {
                 title: t("project2Title"),
