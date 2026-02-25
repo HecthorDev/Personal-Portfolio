@@ -53,7 +53,7 @@ export default function Projects() {
                 description: t("project4Description"),
                 image: "/Img/Project4.png",
                 tags: ["React", "CSS3", "UUID"],
-                link: "https://org-930f7xkpq-hector-garcias-projects.vercel.app/",
+                link: "https://org-rho-seven.vercel.app/",
             },
         ],
         [t]
