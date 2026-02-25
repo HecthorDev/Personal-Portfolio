@@ -117,7 +117,6 @@ export default function Projects() {
                         onDragStart={() => setIsDragging(true)}
                         onDragEnd={() => {
                             setIsDragging(false);
-                            // Ensure wrapped bounds after drag
                             x.set(wrapLoop(x.get(), -loopWidth, 0));
                         }}
                     >
