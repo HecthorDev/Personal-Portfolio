@@ -1,5 +1,5 @@
 import { animate, motion, useAnimationFrame, useMotionValue } from "framer-motion";
-import { useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useLanguage } from "../lib/i18n/useLanguage";
 import GlassCard from "./ui/GlassCard";
 
@@ -19,6 +19,7 @@ export default function Projects() {
     const x = useMotionValue(0);
     const [loopWidth, setLoopWidth] = useState(0);
     const [isPaused, setIsPaused] = useState(false);
+    const [isDragging, setIsDragging] = useState(false);
     const { t } = useLanguage();
 
     const projects = useMemo(
@@ -73,7 +74,7 @@ export default function Projects() {
     }, [x, projects.length]);
 
     useAnimationFrame((_, delta) => {
-        if (isPaused || loopWidth === 0) return;
+        if (isPaused || loopWidth === 0 || isDragging) return;
         const nextX = x.get() - (AUTO_SCROLL_SPEED * delta) / 1000;
         x.set(wrapLoop(nextX, -loopWidth, 0));
     });
@@ -103,14 +104,23 @@ export default function Projects() {
                 <div ref={viewportRef} className="relative w-full overflow-x-hidden overflow-y-visible"
                     onPointerEnter={(e) => { if (e.pointerType === "mouse") setIsPaused(true); }}
                     onPointerLeave={(e) => { if (e.pointerType === "mouse") setIsPaused(false); }}
-                    onTouchStart={() => setIsPaused(true)}
-                    onTouchEnd={() => setIsPaused(false)}
-                    onTouchCancel={() => setIsPaused(false)}
                 >
                     <div className="pointer-events-none absolute bottom-0 left-0 top-0 z-20 w-16 bg-gradient-to-r from-black to-transparent sm:w-24" />
                     <div className="pointer-events-none absolute bottom-0 right-0 top-0 z-20 w-16 bg-gradient-to-l from-black to-transparent sm:w-24" />
 
-                    <motion.div style={{ x }} className="flex w-max px-5 py-6 sm:px-8 md:px-12 lg:px-16 animate-scroll-fallback">
+                    <motion.div
+                        style={{ x }}
+                        className="flex w-max px-5 py-6 sm:px-8 md:px-12 lg:px-16 animate-scroll-fallback"
+                        drag="x"
+                        dragConstraints={{ left: -loopWidth, right: 0 }}
+                        dragElastic={0.1}
+                        onDragStart={() => setIsDragging(true)}
+                        onDragEnd={() => {
+                            setIsDragging(false);
+                            // Ensure wrapped bounds after drag
+                            x.set(wrapLoop(x.get(), -loopWidth, 0));
+                        }}
+                    >
                         {duplicatedProjects.map((group, groupIndex) => (
                             <div key={groupIndex} ref={groupIndex === 0 ? firstSetRef : undefined} className="flex gap-5 pr-5 sm:gap-7 sm:pr-7">
                                 {group.map((project, index) => (
