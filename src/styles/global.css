@@ -157,3 +157,18 @@ html[data-theme="light"] .footer-glass {
         0 8px 22px rgba(24, 24, 27, 0.08),
         inset 0 1px 0 rgba(255, 255, 255, 0.75);
 }
+
+@keyframes scroll-infinite {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.animate-scroll-fallback {
+    animation: scroll-infinite 40s linear infinite;
+    display: flex;
+    width: max-content;
+}
+
+.animate-scroll-fallback:hover {
+    animation-play-state: paused;
+}

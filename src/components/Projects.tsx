@@ -118,7 +118,7 @@ export default function Projects() {
                     <div className="pointer-events-none absolute bottom-0 left-0 top-0 z-20 w-16 bg-gradient-to-r from-black to-transparent sm:w-24" />
                     <div className="pointer-events-none absolute bottom-0 right-0 top-0 z-20 w-16 bg-gradient-to-l from-black to-transparent sm:w-24" />
 
-                    <motion.div style={{ x }} className="flex w-max px-5 py-6 sm:px-8 md:px-12 lg:px-16">
+                    <motion.div style={{ x }} className="flex w-max px-5 py-6 sm:px-8 md:px-12 lg:px-16 animate-scroll-fallback">
                         {duplicatedProjects.map((group, groupIndex) => (
                             <div key={groupIndex} ref={groupIndex === 0 ? firstSetRef : undefined} className="flex gap-5 pr-5 sm:gap-7 sm:pr-7">
                                 {group.map((project, index) => (
