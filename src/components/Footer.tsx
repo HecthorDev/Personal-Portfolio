@@ -36,7 +36,7 @@ export default function Footer() {
                                 </svg>
                             </a>
                             <a
-                                href="https://linkedin.com"
+                                href="https://www.linkedin.com/in/hector19garcia/"
                                 target="_blank"
                                 rel="noreferrer"
                                 aria-label="LinkedIn"
