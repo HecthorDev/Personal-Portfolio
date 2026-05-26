@@ -109,7 +109,7 @@ function ContactFormContent() {
     const selectClassName = "w-full rounded-2xl border border-zinc-700/50 bg-zinc-950/20 px-6 py-4 text-white shadow-inner backdrop-blur-md transition-all focus:bg-zinc-900/40 focus:outline-none";
 
     return (
-        <section id="contact" className="relative scroll-mt-24 bg-black py-16 !min-h-0 !items-start sm:py-20">
+        <section id="contact" className="relative scroll-mt-16 bg-black py-16 !min-h-0 !items-start sm:py-20">
             <div className="mx-auto max-w-3xl px-5 sm:px-8 md:px-12">
                 <div className="mb-8 text-center sm:mb-12">
                     <span className="text-xs font-bold uppercase tracking-wider text-primary">{t("contactEyebrow")}</span>

@@ -63,7 +63,7 @@ export default function Hero() {
             <a href="#contact" className="inline-flex h-12 w-full sm:w-auto sm:h-14 min-w-[200px] items-center justify-center px-6 sm:px-8 py-2 text-center text-xs sm:text-sm font-bold uppercase tracking-widest whitespace-nowrap rounded-[20px] bg-zinc-100 dark:bg-zinc-900 text-black dark:text-white hover:!bg-primary hover:!text-black transition-all duration-300">
               {t("startProject")}
             </a>
-            <a href="#case-studies" className="inline-flex h-12 w-full sm:w-auto sm:h-14 min-w-[200px] items-center justify-center px-6 sm:px-8 py-2 text-center text-xs sm:text-sm font-bold uppercase tracking-widest whitespace-nowrap rounded-[20px] bg-zinc-100 dark:bg-zinc-900 text-black dark:text-white hover:!bg-primary hover:!text-black transition-all duration-300">
+            <a href="#services" className="inline-flex h-12 w-full sm:w-auto sm:h-14 min-w-[200px] items-center justify-center px-6 sm:px-8 py-2 text-center text-xs sm:text-sm font-bold uppercase tracking-widest whitespace-nowrap rounded-[20px] bg-zinc-100 dark:bg-zinc-900 text-black dark:text-white hover:!bg-primary hover:!text-black transition-all duration-300">
               {t("viewWork")}
             </a>
           </div>

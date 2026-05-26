@@ -185,7 +185,7 @@ export default function Projects() {
     }, []);
 
     return (
-        <section id="projects" className="relative scroll-mt-24 bg-black py-20 !min-h-0 !items-start sm:py-24 lg:flex lg:py-20">
+        <section id="projects" className="relative scroll-mt-16 bg-black py-20 !min-h-0 !items-start sm:py-24 lg:flex lg:py-20">
             <div className="w-full">
                 <div className="mx-auto max-w-7xl px-5 sm:px-8 md:px-16 lg:px-20 text-white">
                     <div className="mb-8 space-y-4 text-center sm:mb-10">
