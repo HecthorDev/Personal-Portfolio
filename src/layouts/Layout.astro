@@ -79,23 +79,25 @@ const {
 					return section instanceof HTMLElement ? section : null;
 				};
 
-				const centerSectionInViewport = (section, behavior = "smooth") => {
+				const scrollSectionIntoView = (section, behavior = "smooth") => {
 					const rect = section.getBoundingClientRect();
 					const absoluteTop = window.scrollY + rect.top;
-					const centeredTop = absoluteTop + rect.height / 2 - window.innerHeight / 2;
+					const header = document.querySelector("header");
+					const headerHeight = header instanceof HTMLElement ? header.offsetHeight : 0;
+					const targetTop = absoluteTop - headerHeight - 16;
 					const maxScrollTop = document.documentElement.scrollHeight - window.innerHeight;
-					const targetTop = clamp(centeredTop, 0, Math.max(0, maxScrollTop));
+					const nextTop = clamp(targetTop, 0, Math.max(0, maxScrollTop));
 
 					window.scrollTo({
-						top: targetTop,
+						top: nextTop,
 						behavior: prefersReducedMotion ? "auto" : behavior,
 					});
 				};
 
-				const navigateToHashCentered = (hash, behavior = "smooth") => {
+				const navigateToHash = (hash, behavior = "smooth") => {
 					const section = getSectionFromHash(hash);
 					if (!section) return;
-					centerSectionInViewport(section, behavior);
+					scrollSectionIntoView(section, behavior);
 				};
 
 				document.addEventListener("click", (event) => {
@@ -117,16 +119,16 @@ const {
 						history.pushState(null, "", hash);
 					}
 
-					centerSectionInViewport(section, "smooth");
+					scrollSectionIntoView(section, "smooth");
 				});
 
 				window.addEventListener("hashchange", () => {
-					navigateToHashCentered(window.location.hash, "smooth");
+					navigateToHash(window.location.hash, "smooth");
 				});
 
 				window.addEventListener("load", () => {
 					if (window.location.hash) {
-						navigateToHashCentered(window.location.hash, "auto");
+						navigateToHash(window.location.hash, "auto");
 					}
 				});
 			})();

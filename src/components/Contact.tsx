@@ -1,13 +1,12 @@
-import { useState, useRef, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "../lib/i18n/useLanguage";
 import GlassCard from "./ui/GlassCard";
 import GlassInput from "./ui/GlassInput";
-import emailjs from '@emailjs/browser';
+import emailjs from "@emailjs/browser";
 import { GoogleReCaptchaProvider, useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 function ContactFormContent() {
-    const { t } = useLanguage();
+    const { currentLang, t } = useLanguage();
     const form = useRef<HTMLFormElement>(null);
     const { executeRecaptcha } = useGoogleReCaptcha();
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -15,11 +14,17 @@ function ContactFormContent() {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
+        whatsapp: "",
+        serviceType: "",
+        budget: "",
         message: "",
     });
     const [errors, setErrors] = useState({
         name: "",
         email: "",
+        whatsapp: "",
+        serviceType: "",
+        budget: "",
         message: "",
     });
 
@@ -28,7 +33,7 @@ function ContactFormContent() {
     }, []);
 
     const validate = (): boolean => {
-        const newErrors = { name: "", email: "", message: "" };
+        const newErrors = { name: "", email: "", whatsapp: "", serviceType: "", budget: "", message: "" };
         let isValid = true;
 
         if (!formData.name.trim()) {
@@ -42,6 +47,18 @@ function ContactFormContent() {
             newErrors.email = t("contactInvalidEmail");
             isValid = false;
         }
+        if (!formData.whatsapp.trim()) {
+            newErrors.whatsapp = t("contactIncomplete");
+            isValid = false;
+        }
+        if (!formData.serviceType.trim()) {
+            newErrors.serviceType = t("contactIncomplete");
+            isValid = false;
+        }
+        if (!formData.budget.trim()) {
+            newErrors.budget = t("contactIncomplete");
+            isValid = false;
+        }
         if (!formData.message.trim()) {
             newErrors.message = t("contactIncomplete");
             isValid = false;
@@ -51,17 +68,17 @@ function ContactFormContent() {
         return isValid;
     };
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+        const { name, value } = event.target;
         if (name === "name" && value !== "" && !/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(value)) return;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        setFormData((prev) => ({ ...prev, [name]: value }));
         if (errors[name as keyof typeof errors]) {
-            setErrors(prev => ({ ...prev, [name]: "" }));
+            setErrors((prev) => ({ ...prev, [name]: "" }));
         }
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+    const handleSubmit = async (event: React.FormEvent) => {
+        event.preventDefault();
         if (!validate()) return;
         if (!executeRecaptcha) {
             setStatus("error");
@@ -70,24 +87,29 @@ function ContactFormContent() {
         setStatus("loading");
         try {
             const token = await executeRecaptcha("submit_contact");
-            if (!token) { setStatus("error"); return; }
+            if (!token) {
+                setStatus("error");
+                return;
+            }
             if (!form.current) return;
             await emailjs.sendForm(
-                'service_z3vp9mf',
-                'template_r7v6fqb',
+                "service_z3vp9mf",
+                "template_r7v6fqb",
                 form.current,
-                'QVs5FtgmHTC1gH3UC'
+                "QVs5FtgmHTC1gH3UC"
             );
             setStatus("success");
-            setFormData({ name: "", email: "", message: "" });
+            setFormData({ name: "", email: "", whatsapp: "", serviceType: "", budget: "", message: "" });
         } catch (error) {
             console.error(error);
             setStatus("error");
         }
     };
 
+    const selectClassName = "w-full rounded-2xl border border-zinc-700/50 bg-zinc-950/20 px-6 py-4 text-white shadow-inner backdrop-blur-md transition-all focus:bg-zinc-900/40 focus:outline-none";
+
     return (
-        <section id="contact" className="relative bg-black py-16 sm:py-20">
+        <section id="contact" className="relative scroll-mt-24 bg-black py-16 !min-h-0 !items-start sm:py-20">
             <div className="mx-auto max-w-3xl px-5 sm:px-8 md:px-12">
                 <div className="mb-8 text-center sm:mb-12">
                     <span className="text-xs font-bold uppercase tracking-wider text-primary">{t("contactEyebrow")}</span>
@@ -99,8 +121,10 @@ function ContactFormContent() {
 
                 <GlassCard className="p-5 sm:p-6 md:p-8" variant="clear" isInteractive={false}>
                     <form ref={form} onSubmit={handleSubmit} noValidate className="space-y-4">
+                        <input type="hidden" name="service_type" value={formData.serviceType} />
+                        <input type="hidden" name="language" value={currentLang} />
+                        <input type="hidden" name="page_url" value={isMounted ? window.location.href : ""} />
 
-                        {/* Row 1: Name + Email */}
                         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                             <div className="space-y-1">
                                 <GlassInput
@@ -132,7 +156,73 @@ function ContactFormContent() {
                             </div>
                         </div>
 
-                        {/* Row 2: Message full width */}
+                        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                            <div className="space-y-1">
+                                <GlassInput
+                                    label={t("labelWhatsapp")}
+                                    id="whatsapp"
+                                    name="whatsapp"
+                                    type="text"
+                                    value={formData.whatsapp}
+                                    onChange={handleChange}
+                                    placeholder={t("placeholderWhatsapp")}
+                                />
+                                {errors.whatsapp && (
+                                    <p className="ml-2 text-xs text-red-400">{errors.whatsapp}</p>
+                                )}
+                            </div>
+                            <div className="space-y-1">
+                                <label htmlFor="serviceType" className="ml-2 block text-sm font-medium text-zinc-400">
+                                    {t("labelServiceType")}
+                                </label>
+                                <div className="group relative overflow-hidden rounded-2xl">
+                                    <select
+                                        id="serviceType"
+                                        name="serviceType"
+                                        value={formData.serviceType}
+                                        onChange={handleChange}
+                                        className={`${selectClassName} ${formData.serviceType ? "" : "text-zinc-500"}`}
+                                    >
+                                        <option value="">{t("placeholderServiceType")}</option>
+                                        <option value={t("serviceOptionLanding")}>{t("serviceOptionLanding")}</option>
+                                        <option value={t("serviceOptionCommunity")}>{t("serviceOptionCommunity")}</option>
+                                        <option value={t("serviceOptionCampaign")}>{t("serviceOptionCampaign")}</option>
+                                        <option value={t("serviceOptionGrowth")}>{t("serviceOptionGrowth")}</option>
+                                        <option value={t("serviceOptionNotSure")}>{t("serviceOptionNotSure")}</option>
+                                    </select>
+                                    <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-white/10 transition-colors duration-300 group-focus-within:ring-primary/50" />
+                                </div>
+                                {errors.serviceType && (
+                                    <p className="ml-2 text-xs text-red-400">{errors.serviceType}</p>
+                                )}
+                            </div>
+                        </div>
+
+                        <div className="space-y-1">
+                            <label htmlFor="budget" className="ml-2 block text-sm font-medium text-zinc-400">
+                                {t("labelBudget")}
+                            </label>
+                            <div className="group relative overflow-hidden rounded-2xl">
+                                <select
+                                    id="budget"
+                                    name="budget"
+                                    value={formData.budget}
+                                    onChange={handleChange}
+                                    className={`${selectClassName} ${formData.budget ? "" : "text-zinc-500"}`}
+                                >
+                                    <option value="">{t("placeholderBudget")}</option>
+                                    <option value={t("budgetOptionStarter")}>{t("budgetOptionStarter")}</option>
+                                    <option value={t("budgetOptionGrowth")}>{t("budgetOptionGrowth")}</option>
+                                    <option value={t("budgetOptionCustom")}>{t("budgetOptionCustom")}</option>
+                                    <option value={t("budgetOptionNotSure")}>{t("budgetOptionNotSure")}</option>
+                                </select>
+                                <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-white/10 transition-colors duration-300 group-focus-within:ring-primary/50" />
+                            </div>
+                            {errors.budget && (
+                                <p className="ml-2 text-xs text-red-400">{errors.budget}</p>
+                            )}
+                        </div>
+
                         <div className="space-y-1">
                             <label htmlFor="message" className="ml-2 text-sm font-medium text-zinc-400">
                                 {t("labelMessage")}
@@ -154,7 +244,6 @@ function ContactFormContent() {
                             )}
                         </div>
 
-                        {/* Submit */}
                         <div className="mt-4 flex items-center justify-center pt-2">
                             <button
                                 disabled={status === "loading"}

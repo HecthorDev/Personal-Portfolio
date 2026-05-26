@@ -185,13 +185,16 @@ export default function Projects() {
     }, []);
 
     return (
-        <section id="projects" className="relative bg-black py-20 sm:py-24 lg:flex lg:min-h-screen lg:items-center lg:py-0">
+        <section id="projects" className="relative scroll-mt-24 bg-black py-20 !min-h-0 !items-start sm:py-24 lg:flex lg:py-20">
             <div className="w-full">
                 <div className="mx-auto max-w-7xl px-5 sm:px-8 md:px-16 lg:px-20 text-white">
                     <div className="mb-8 space-y-4 text-center sm:mb-10">
                         <h2 className="text-3xl font-bold sm:text-4xl md:text-5xl">
                             {t("projectsPrefix")} <span className="text-primary">{t("projectsHighlight")}</span>
                         </h2>
+                        <p className="mx-auto max-w-3xl text-base leading-relaxed text-zinc-400 sm:text-lg">
+                            {t("projectsIntro")}
+                        </p>
                         {/* Hint text intentionally removed — the UX speaks for itself */}
                     </div>
                 </div>

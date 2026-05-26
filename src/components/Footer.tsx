@@ -62,6 +62,15 @@ export default function Footer() {
                         </div>
                     </div>
 
+                    <div className="mb-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs font-medium text-zinc-500 sm:mb-6">
+                        <a href="/privacy-policy" className="transition-colors hover:text-primary">
+                            {t("footerPrivacyPolicy")}
+                        </a>
+                        <a href="/terms-of-service" className="transition-colors hover:text-primary">
+                            {t("footerTerms")}
+                        </a>
+                    </div>
+
                     {/* Bottom bar: copyright centered */}
                     <div className="border-t border-white/10 pt-3.5 text-center text-xs text-zinc-600 sm:text-[0.78rem]">
                         <p>© {new Date().getFullYear()} Hector Garcia. {t("footerRights")}</p>
