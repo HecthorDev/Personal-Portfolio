@@ -8,17 +8,17 @@ export default function Footer() {
             <div className="mx-auto max-w-7xl px-5 sm:px-8 md:px-16 lg:px-20">
                 <div className="footer-glass rounded-3xl p-5 sm:p-6 md:p-7">
 
-                    <div className="flex flex-col items-center justify-between gap-6 sm:flex-row sm:items-center mb-6 sm:mb-7">
+                    <div className="mb-6 flex flex-col items-center justify-between gap-6 sm:mb-7 lg:flex-row lg:items-center">
                         <div className="space-y-3 text-center sm:text-left">
                             <a href="#home" className="text-xl font-black tracking-tighter text-white sm:text-2xl">
                                 HG<span className="text-primary">.</span>
                             </a>
-                            <p className="text-sm font-bold uppercase tracking-widest text-white sm:text-base">
-                                {t("footerTagline")}
+                            <p className="text-sm font-bold uppercase tracking-widest text-white sm:text-base xl:whitespace-nowrap">
+                                {t("footerTaglinePrefix")} <span className="text-primary">{t("footerTaglineHighlight")}</span>
                             </p>
                         </div>
 
-                        <div className="flex gap-3">
+                        <div className="flex shrink-0 items-center gap-3 rounded-full bg-black/15 p-1.5">
                             <a
                                 href="https://github.com/HecthorDev"
                                 target="_blank"
@@ -58,14 +58,16 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    <div className="flex flex-col items-center justify-center gap-3 border-t border-white/10 pt-3.5 text-center text-xs text-zinc-600 sm:flex-row sm:flex-wrap sm:text-[0.78rem]">
+                    <div className="flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-3.5 text-center text-xs text-zinc-600 sm:flex-row sm:text-[0.78rem]">
                         <p>© {new Date().getFullYear()} Hector Garcia. {t("footerRights")}</p>
-                        <a href="/privacy-policy" className="transition-colors hover:text-primary">
-                            {t("footerPrivacyPolicy")}
-                        </a>
-                        <a href="/terms-of-service" className="transition-colors hover:text-primary">
-                            {t("footerTerms")}
-                        </a>
+                        <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 sm:justify-end">
+                            <a href="/privacy-policy" className="transition-colors hover:text-primary">
+                                {t("footerPrivacyPolicy")}
+                            </a>
+                            <a href="/terms-of-service" className="transition-colors hover:text-primary">
+                                {t("footerTerms")}
+                            </a>
+                        </div>
                     </div>
 
                 </div>
