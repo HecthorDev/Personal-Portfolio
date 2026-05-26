@@ -63,7 +63,7 @@ export default function Hero() {
             <a href="#contact" className="inline-flex h-12 w-full sm:w-auto sm:h-14 min-w-[200px] items-center justify-center px-6 sm:px-8 py-2 text-center text-xs sm:text-sm font-bold uppercase tracking-widest whitespace-nowrap rounded-[20px] bg-zinc-100 dark:bg-zinc-900 text-black dark:text-white hover:!bg-primary hover:!text-black transition-all duration-300">
               {t("startProject")}
             </a>
-            <a href="#projects" className="inline-flex h-12 w-full sm:w-auto sm:h-14 min-w-[200px] items-center justify-center px-6 sm:px-8 py-2 text-center text-xs sm:text-sm font-bold uppercase tracking-widest whitespace-nowrap rounded-[20px] bg-zinc-100 dark:bg-zinc-900 text-black dark:text-white hover:!bg-primary hover:!text-black transition-all duration-300">
+            <a href="#case-studies" className="inline-flex h-12 w-full sm:w-auto sm:h-14 min-w-[200px] items-center justify-center px-6 sm:px-8 py-2 text-center text-xs sm:text-sm font-bold uppercase tracking-widest whitespace-nowrap rounded-[20px] bg-zinc-100 dark:bg-zinc-900 text-black dark:text-white hover:!bg-primary hover:!text-black transition-all duration-300">
               {t("viewWork")}
             </a>
           </div>
@@ -84,7 +84,7 @@ export default function Hero() {
 
           <a
             href="#about"
-            aria-label="Scroll to discover"
+            aria-label={t("scrollDiscover")}
             className="mt-16 sm:mt-20 inline-flex flex-col items-center justify-center text-zinc-400 transition-colors duration-300 hover:!text-primary hover:[filter:drop-shadow(0px_4px_15px_rgba(0,0,0,0.3))] animate-bounce"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="-mb-10"><path d="m6 9 6 6 6-6" /></svg>

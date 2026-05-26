@@ -7,11 +7,26 @@ export default function Process() {
 
     const steps = useMemo(
         () => [
-            t("processStepDiagnosis"),
-            t("processStepStrategy"),
-            t("processStepBuild"),
-            t("processStepLaunch"),
-            t("processStepOptimize"),
+            {
+                title: t("processStepDiagnosis"),
+                description: t("processStepDiagnosisDescription"),
+            },
+            {
+                title: t("processStepStrategy"),
+                description: t("processStepStrategyDescription"),
+            },
+            {
+                title: t("processStepBuild"),
+                description: t("processStepBuildDescription"),
+            },
+            {
+                title: t("processStepLaunch"),
+                description: t("processStepLaunchDescription"),
+            },
+            {
+                title: t("processStepOptimize"),
+                description: t("processStepOptimizeDescription"),
+            },
         ],
         [t]
     );
@@ -30,14 +45,17 @@ export default function Process() {
 
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
                     {steps.map((step, index) => (
-                        <GlassCard key={step} className="services-card-unified h-full p-5" isInteractive={false}>
-                            <div className="flex h-full flex-col gap-4">
+                        <GlassCard key={step.title} className="services-card-unified h-full p-5" isInteractive={false}>
+                            <div className="flex h-full flex-col gap-3">
                                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary">
                                     {(index + 1).toString().padStart(2, "0")}
                                 </span>
                                 <h3 className="text-lg font-bold leading-tight text-white">
-                                    {step}
+                                    {step.title}
                                 </h3>
+                                <p className="text-sm leading-relaxed text-zinc-400">
+                                    {step.description}
+                                </p>
                             </div>
                         </GlassCard>
                     ))}

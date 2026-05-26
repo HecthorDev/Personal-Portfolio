@@ -11,17 +11,38 @@ import '../styles/global.css';
 
 interface Props {
 	title: string;
+	description?: string;
+	ogTitle?: string;
+	ogDescription?: string;
+	ogImage?: string;
+	twitterTitle?: string;
+	twitterDescription?: string;
 }
 
-const { title } = Astro.props;
+const {
+	title,
+	description = "Landing pages, strategic content, and digital campaigns for businesses that need to explain their offer clearly and turn attention into real opportunities.",
+	ogTitle = title,
+	ogDescription = "Landing pages, content strategy, and campaign flows built to help businesses communicate clearly and guide people toward action.",
+	ogImage = "/Img/ProfilePhoto.jpeg",
+	twitterTitle = title,
+	twitterDescription = "Landing pages, strategic content, and digital campaigns for clearer offers and better client conversations.",
+} = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en" class="scroll-smooth">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Hector Garcia - Full Stack Developer Portfolio" />
+		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={ogTitle} />
+		<meta property="og:description" content={ogDescription} />
+		<meta property="og:image" content={ogImage} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={twitterTitle} />
+		<meta name="twitter:description" content={twitterDescription} />
 		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
