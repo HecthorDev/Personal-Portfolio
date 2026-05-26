@@ -11,7 +11,7 @@ const capabilityLogos = [
   { src: "https://cdn.simpleicons.org/meta/0467DF", alt: "Meta", title: "Meta" },
   { src: "https://cdn.simpleicons.org/googleads/4285F4", alt: "Google Ads", title: "Google Ads" },
   { src: "https://cdn.simpleicons.org/googleanalytics/E37400", alt: "Google Analytics", title: "Google Analytics" },
-  { src: "https://cdn.simpleicons.org/canva/00C4CC", alt: "Canva", title: "Canva" },
+  { src: "https://img.icons8.com/fluency/96/canva.png", alt: "Canva", title: "Canva" },
   { src: "https://cdn.simpleicons.org/figma/F24E1E", alt: "Figma", title: "Figma" },
   { src: "https://cdn.simpleicons.org/notion/000000", alt: "Notion", title: "Notion", className: "dark:invert" },
   { src: "https://cdn.simpleicons.org/astro/BC52EE", alt: "Astro", title: "Astro" },
