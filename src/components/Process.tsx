@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { useLanguage } from "../lib/i18n/useLanguage";
 import GlassCard from "./ui/GlassCard";
+import TiltedCard from "./ui/TiltedCard";
 
 export default function Process() {
     const { t } = useLanguage();
@@ -45,19 +46,23 @@ export default function Process() {
 
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
                     {steps.map((step, index) => (
-                        <GlassCard key={step.title} className="services-card-unified h-full p-5" isInteractive={false}>
-                            <div className="flex h-full flex-col gap-3">
-                                <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary">
-                                    {(index + 1).toString().padStart(2, "0")}
-                                </span>
-                                <h3 className="text-lg font-bold leading-tight text-white">
-                                    {step.title}
-                                </h3>
-                                <p className="text-sm leading-relaxed text-zinc-400">
-                                    {step.description}
-                                </p>
-                            </div>
-                        </GlassCard>
+                        <div key={step.title} className="h-full">
+                            <TiltedCard containerClassName="h-full" className="h-full" rotateAmplitude={10} scaleOnHover={1.02}>
+                                <GlassCard className="services-card-unified h-full p-5">
+                                    <div className="flex h-full flex-col gap-3">
+                                        <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary">
+                                            {(index + 1).toString().padStart(2, "0")}
+                                        </span>
+                                        <h3 className="text-lg font-bold leading-tight text-white">
+                                            {step.title}
+                                        </h3>
+                                        <p className="text-sm leading-relaxed text-zinc-400">
+                                            {step.description}
+                                        </p>
+                                    </div>
+                                </GlassCard>
+                            </TiltedCard>
+                        </div>
                     ))}
                 </div>
             </div>
