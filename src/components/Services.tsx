@@ -8,7 +8,7 @@ interface ServiceCard {
     subtitle: string;
     description: string;
     badge: string;
-    iconSrc: string;
+    iconSrc: string | string[];
     accent: string;
 }
 
@@ -22,7 +22,7 @@ export default function Services() {
                 subtitle: t("serviceUiSubtitle"),
                 description: t("serviceUiDescription"),
                 badge: t("serviceUiBadge"),
-                iconSrc: "https://img.icons8.com/fluency/240/landing-page.png",
+                iconSrc: "https://img.icons8.com/fluency/240/web-design.png",
                 accent: "#00E676",
             },
             {
@@ -30,7 +30,12 @@ export default function Services() {
                 subtitle: t("serviceFullStackSubtitle"),
                 description: t("serviceFullStackDescription"),
                 badge: t("serviceFullStackBadge"),
-                iconSrc: "https://img.icons8.com/fluency/240/content.png",
+                iconSrc: [
+                    "https://img.icons8.com/fluency/96/instagram-new.png",
+                    "https://img.icons8.com/fluency/96/facebook-new.png",
+                    "https://img.icons8.com/fluency/96/tiktok.png",
+                    "https://img.icons8.com/fluency/96/whatsapp.png",
+                ],
                 accent: "#6EE7B7",
             },
             {
@@ -38,7 +43,7 @@ export default function Services() {
                 subtitle: t("serviceImmersiveSubtitle"),
                 description: t("serviceImmersiveDescription"),
                 badge: t("serviceImmersiveBadge"),
-                iconSrc: "https://img.icons8.com/fluency/240/advertising.png",
+                iconSrc: "https://img.icons8.com/fluency/240/marketing.png",
                 accent: "#22D3EE",
             },
             {
@@ -46,7 +51,7 @@ export default function Services() {
                 subtitle: t("serviceMobileSubtitle"),
                 description: t("serviceMobileDescription"),
                 badge: t("serviceMobileBadge"),
-                iconSrc: "https://img.icons8.com/fluency/240/growth.png",
+                iconSrc: "https://img.icons8.com/fluency/240/combo-chart.png",
                 accent: "#60A5FA",
             },
         ],
@@ -70,18 +75,40 @@ export default function Services() {
                                 <GlassCard className="services-card-unified h-full overflow-hidden p-0">
                                     <div className="flex items-center justify-between gap-3 px-5 pt-4 sm:px-6 sm:pt-5">
                                         <span className="rounded-full border border-primary/35 bg-white dark:bg-black/35 px-2.5 py-1 text-[11px] font-bold text-primary">{service.badge}</span>
-                                        <img
-                                            src={service.iconSrc}
-                                            alt=""
-                                            aria-hidden="true"
-                                            loading="lazy"
-                                            draggable={false}
-                                            onError={(event) => {
-                                                event.currentTarget.src = "https://img.icons8.com/fluency/240/commercial.png";
-                                            }}
-                                            className="h-14 w-14 object-contain sm:h-16 sm:w-16"
-                                            style={{ filter: `drop-shadow(0 8px 20px ${service.accent}44)` }}
-                                        />
+                                        {Array.isArray(service.iconSrc) ? (
+                                            <div
+                                                className="grid h-16 w-16 grid-cols-2 gap-1.5 rounded-2xl bg-black/20 p-1.5"
+                                                aria-hidden="true"
+                                                style={{ filter: `drop-shadow(0 8px 20px ${service.accent}33)` }}
+                                            >
+                                                {service.iconSrc.map((iconSrc) => (
+                                                    <img
+                                                        key={iconSrc}
+                                                        src={iconSrc}
+                                                        alt=""
+                                                        loading="lazy"
+                                                        draggable={false}
+                                                        onError={(event) => {
+                                                            event.currentTarget.src = "https://img.icons8.com/fluency/96/share.png";
+                                                        }}
+                                                        className="h-full w-full object-contain"
+                                                    />
+                                                ))}
+                                            </div>
+                                        ) : (
+                                            <img
+                                                src={service.iconSrc}
+                                                alt=""
+                                                aria-hidden="true"
+                                                loading="lazy"
+                                                draggable={false}
+                                                onError={(event) => {
+                                                    event.currentTarget.src = "https://img.icons8.com/fluency/240/commercial.png";
+                                                }}
+                                                className="h-14 w-14 object-contain sm:h-16 sm:w-16"
+                                                style={{ filter: `drop-shadow(0 8px 20px ${service.accent}44)` }}
+                                            />
+                                        )}
                                     </div>
 
                                     <div className="px-5 pb-5 pt-3 sm:px-6 sm:pb-6 sm:pt-4">
