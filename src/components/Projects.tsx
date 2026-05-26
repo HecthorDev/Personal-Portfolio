@@ -192,10 +192,9 @@ export default function Projects() {
                         <h2 className="text-3xl font-bold sm:text-4xl md:text-5xl">
                             {t("projectsPrefix")} <span className="text-primary">{t("projectsHighlight")}</span>
                         </h2>
-                        <p className="mx-auto max-w-3xl text-base leading-relaxed text-zinc-400 sm:text-lg">
+                        <p className="mx-auto max-w-none text-base leading-relaxed text-zinc-400 sm:text-lg xl:whitespace-nowrap">
                             {t("projectsIntro")}
                         </p>
-                        {/* Hint text intentionally removed — the UX speaks for itself */}
                     </div>
                 </div>
 

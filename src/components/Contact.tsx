@@ -110,16 +110,16 @@ function ContactFormContent() {
 
     return (
         <section id="contact" className="relative scroll-mt-16 bg-black py-16 !min-h-0 !items-start sm:py-20">
-            <div className="mx-auto max-w-3xl px-5 sm:px-8 md:px-12">
+            <div className="mx-auto max-w-5xl px-5 sm:px-8 md:px-12">
                 <div className="mb-8 text-center sm:mb-12">
                     <span className="text-xs font-bold uppercase tracking-wider text-primary">{t("contactEyebrow")}</span>
                     <h2 className="mt-2 mb-4 text-3xl font-bold text-white sm:text-4xl md:text-5xl">
                         {t("contactPrefix")} <span className="text-primary">{t("contactHighlight")}</span>
                     </h2>
-                    <p className="text-zinc-400 text-sm">{t("contactIntro")}</p>
+                    <p className="mx-auto max-w-none text-sm text-zinc-400 xl:whitespace-nowrap">{t("contactIntro")}</p>
                 </div>
 
-                <GlassCard className="p-5 sm:p-6 md:p-8" variant="clear" isInteractive={false}>
+                <GlassCard className="mx-auto max-w-3xl p-5 sm:p-6 md:p-8" variant="clear" isInteractive={false}>
                     <form ref={form} onSubmit={handleSubmit} noValidate className="space-y-4">
                         <input type="hidden" name="service_type" value={formData.serviceType} />
                         <input type="hidden" name="language" value={currentLang} />
@@ -255,11 +255,11 @@ function ContactFormContent() {
                         </div>
 
                         <p className="text-zinc-500 text-[10px] text-center mt-2">
-                            This site is protected by reCAPTCHA and the Google{" "}
-                            <a href="https://policies.google.com/privacy" className="text-primary hover:underline">Privacy Policy</a>{" "}
-                            and{" "}
-                            <a href="https://policies.google.com/terms" className="text-primary hover:underline">Terms of Service</a>{" "}
-                            apply.
+                            {t("recaptchaNoticeStart")}{" "}
+                            <a href="https://policies.google.com/privacy" className="text-primary hover:underline">{t("recaptchaPrivacyPolicy")}</a>{" "}
+                            {t("recaptchaNoticeAnd")}{" "}
+                            <a href="https://policies.google.com/terms" className="text-primary hover:underline">{t("recaptchaTerms")}</a>{" "}
+                            {t("recaptchaNoticeEnd")}
                         </p>
 
                         {status === "success" && (

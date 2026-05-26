@@ -8,10 +8,7 @@ export default function Footer() {
             <div className="mx-auto max-w-7xl px-5 sm:px-8 md:px-16 lg:px-20">
                 <div className="footer-glass rounded-3xl p-5 sm:p-6 md:p-7">
 
-                    {/* Main row: tagline left, icons right */}
                     <div className="flex flex-col items-center justify-between gap-6 sm:flex-row sm:items-center mb-6 sm:mb-7">
-
-                        {/* Left: logo + tagline */}
                         <div className="space-y-3 text-center sm:text-left">
                             <a href="#home" className="text-xl font-black tracking-tighter text-white sm:text-2xl">
                                 HG<span className="text-primary">.</span>
@@ -21,7 +18,6 @@ export default function Footer() {
                             </p>
                         </div>
 
-                        {/* Right: social icons */}
                         <div className="flex gap-3">
                             <a
                                 href="https://github.com/HecthorDev"
@@ -62,18 +58,14 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    <div className="mb-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs font-medium text-zinc-500 sm:mb-6">
+                    <div className="flex flex-col items-center justify-center gap-3 border-t border-white/10 pt-3.5 text-center text-xs text-zinc-600 sm:flex-row sm:flex-wrap sm:text-[0.78rem]">
+                        <p>© {new Date().getFullYear()} Hector Garcia. {t("footerRights")}</p>
                         <a href="/privacy-policy" className="transition-colors hover:text-primary">
                             {t("footerPrivacyPolicy")}
                         </a>
                         <a href="/terms-of-service" className="transition-colors hover:text-primary">
                             {t("footerTerms")}
                         </a>
-                    </div>
-
-                    {/* Bottom bar: copyright centered */}
-                    <div className="border-t border-white/10 pt-3.5 text-center text-xs text-zinc-600 sm:text-[0.78rem]">
-                        <p>© {new Date().getFullYear()} Hector Garcia. {t("footerRights")}</p>
                     </div>
 
                 </div>

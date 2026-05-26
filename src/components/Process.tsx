@@ -50,7 +50,7 @@ export default function Process() {
                     <h2 className="text-3xl font-bold text-white sm:text-4xl md:text-5xl">
                         {t("processTitle")}
                     </h2>
-                    <p className="mx-auto max-w-3xl text-base leading-relaxed text-zinc-400 sm:text-lg">
+                    <p className="mx-auto max-w-none text-base leading-relaxed text-zinc-400 sm:text-lg xl:whitespace-nowrap">
                         {t("processSubtitle")}
                     </p>
                 </div>

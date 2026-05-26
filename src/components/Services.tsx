@@ -65,7 +65,7 @@ export default function Services() {
                     <h2 className="text-3xl font-bold text-white sm:text-4xl md:text-5xl">
                         {t("servicesPrefix")} <span className="text-primary">{t("servicesHighlight")}</span>
                     </h2>
-                    <p className="mx-auto max-w-3xl text-base text-zinc-400 sm:text-lg">{t("servicesIntro")}</p>
+                    <p className="mx-auto max-w-none text-base text-zinc-400 sm:text-lg xl:whitespace-nowrap">{t("servicesIntro")}</p>
                 </div>
 
                 <div className="grid grid-cols-1 gap-5 sm:gap-7 md:grid-cols-2">

@@ -17,7 +17,7 @@ const applyDocumentLanguage = (lang: SupportedLanguage) => {
 };
 
 export function useLanguage() {
-    const [currentLang, setCurrentLang] = useState<SupportedLanguage>("en");
+    const [currentLang, setCurrentLang] = useState<SupportedLanguage>(() => detectLanguage());
 
     useEffect(() => {
         const initialLanguage = detectLanguage();
