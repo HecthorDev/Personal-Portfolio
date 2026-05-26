@@ -3,20 +3,24 @@ import { useLanguage } from "../lib/i18n/useLanguage";
 import TextType from "./ui/TextType";
 import LogoLoop from "./ui/LogoLoop";
 
-const techLogos = [
+const capabilityLogos = [
+  { src: "https://cdn.simpleicons.org/instagram/E4405F", alt: "Instagram", title: "Instagram" },
+  { src: "https://cdn.simpleicons.org/facebook/1877F2", alt: "Facebook", title: "Facebook" },
+  { src: "https://cdn.simpleicons.org/tiktok/FFFFFF", alt: "TikTok", title: "TikTok" },
+  { src: "https://cdn.simpleicons.org/whatsapp/25D366", alt: "WhatsApp", title: "WhatsApp" },
+  { src: "https://cdn.simpleicons.org/meta/0467DF", alt: "Meta", title: "Meta" },
+  { src: "https://cdn.simpleicons.org/googleads/4285F4", alt: "Google Ads", title: "Google Ads" },
+  { src: "https://cdn.simpleicons.org/googleanalytics/E37400", alt: "Google Analytics", title: "Google Analytics" },
+  { src: "https://cdn.simpleicons.org/canva/00C4CC", alt: "Canva", title: "Canva" },
+  { src: "https://cdn.simpleicons.org/figma/F24E1E", alt: "Figma", title: "Figma" },
+  { src: "https://cdn.simpleicons.org/notion/000000", alt: "Notion", title: "Notion", className: "dark:invert" },
   { src: "https://cdn.simpleicons.org/astro/BC52EE", alt: "Astro", title: "Astro" },
   { src: "https://cdn.simpleicons.org/react/61DAFB", alt: "React", title: "React" },
   { src: "https://cdn.simpleicons.org/nextdotjs/000000", alt: "Next.js", title: "Next.js", className: "dark:invert" },
   { src: "https://cdn.simpleicons.org/typescript/3178C6", alt: "TypeScript", title: "TypeScript" },
   { src: "https://cdn.simpleicons.org/tailwindcss/06B6D4", alt: "Tailwind CSS", title: "Tailwind CSS" },
-  { src: "https://cdn.simpleicons.org/threedotjs/000000", alt: "Three.js", title: "Three.js", className: "dark:invert" },
   { src: "https://cdn.simpleicons.org/nodedotjs/5FA04E", alt: "Node.js", title: "Node.js" },
-  { src: "https://cdn.simpleicons.org/python/3776AB", alt: "Python", title: "Python" },
-  { src: "https://cdn.simpleicons.org/django/44B78B", alt: "Django", title: "Django" },
-  { src: "https://cdn.simpleicons.org/mongodb/47A248", alt: "MongoDB", title: "MongoDB" },
   { src: "https://cdn.simpleicons.org/git/F05032", alt: "Git", title: "Git" },
-  { src: "https://cdn.simpleicons.org/figma/F24E1E", alt: "Figma", title: "Figma" },
-  { src: "https://cdn.simpleicons.org/google/4285F4", alt: "Google Workspace", title: "Google Workspace" },
 ];
 
 export default function Hero() {
@@ -70,7 +74,7 @@ export default function Hero() {
 
           <div className="mt-40 mb-4 w-[100vw] relative left-1/2 -translate-x-1/2">
             <LogoLoop
-              logos={techLogos}
+              logos={capabilityLogos}
               speed={80}
               direction="left"
               logoHeight={35}
@@ -78,7 +82,7 @@ export default function Hero() {
               hoverSpeed={30}
               scaleOnHover
               fadeOut={false}
-              ariaLabel="Technology stack"
+              ariaLabel="Digital tools and technology stack"
             />
           </div>
 
