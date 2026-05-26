@@ -128,17 +128,17 @@ export default function CaseStudies() {
 
     return (
         <section id="case-studies" className="relative scroll-mt-16 bg-black py-20 !min-h-0 !items-start sm:py-24">
-            <div className="mx-auto w-full max-w-[96rem] px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
+            <div className="mx-auto w-full max-w-[112rem] px-3 sm:px-4 md:px-6 lg:px-8 xl:px-10">
                 <div className="mb-10 space-y-4 text-center sm:mb-14">
                     <h2 className="text-3xl font-bold text-white sm:text-4xl md:text-5xl">
                         {t("caseStudiesTitle")}
                     </h2>
-                    <p className="mx-auto max-w-3xl text-base leading-relaxed text-zinc-400 sm:text-lg">
+                    <p className="mx-auto max-w-none text-base leading-relaxed text-zinc-400 sm:text-lg xl:whitespace-nowrap">
                         {t("caseStudiesSubtitle")}
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
                     {caseStudies.map((caseStudy) => {
                         const activeImage = getActiveImage(caseStudy);
                         const activeIndex = getActiveIndex(caseStudy);
