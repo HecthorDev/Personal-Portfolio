@@ -40,44 +40,44 @@ export default function Projects() {
     const projects = useMemo(
         () => [
             {
-                title: t("rinconcitoDulceTitle"),
-                category: t("rinconcitoDulceCategory"),
-                problem: t("rinconcitoDulceProblem"),
-                solution: t("rinconcitoDulceSolution"),
-                goal: t("rinconcitoDulceGoal"),
-                image: "/Img/projects/rinconcito-dulce/post-apertura.jpg",
-                tags: ["Branding", "Social Media", "Launch Campaign", "Content Design"],
-                assetCount: 12,
+                title: t("project1Title"),
+                category: t("project1Category"),
+                description: t("project1Description"),
+                image: "/Img/project1.png",
+                tags: ["HTML", "CSS", "JS"],
+                link: "https://hecthordev.github.io/Secret-Number-Alura-LATAM/",
             },
             {
-                title: t("cindyGlamStudioTitle"),
-                category: t("cindyGlamStudioCategory"),
-                problem: t("cindyGlamStudioProblem"),
-                solution: t("cindyGlamStudioSolution"),
-                goal: t("cindyGlamStudioGoal"),
-                image: "/Img/projects/cindy-glam-studio/post-unas.jpg",
-                tags: ["Beauty", "Social Media", "Promotion", "Visual Identity"],
-                assetCount: 3,
+                title: t("project2Title"),
+                category: t("project2Category"),
+                description: t("project2Description"),
+                image: "/Img/project2.png",
+                tags: ["React", "Tailwind", "Framer"],
+                link: "https://portfolio-alura-eight-iota.vercel.app/",
             },
             {
-                title: t("gmGrowthTitle"),
-                category: t("gmGrowthCategory"),
-                problem: t("gmGrowthProblem"),
-                solution: t("gmGrowthSolution"),
-                goal: t("gmGrowthGoal"),
-                image: "/Img/projects/gm-growth/post-publicar-mas.jpg",
-                tags: ["Growth", "Strategy", "Content", "Education"],
-                assetCount: 2,
+                title: t("project3Title"),
+                category: t("project3Category"),
+                description: t("project3Description"),
+                image: "/Img/project3.png",
+                tags: ["JS", "Algorithm", "UI"],
+                link: "https://hecthordev.github.io/Text-Encryptor/",
             },
             {
-                title: t("bgMultiserviciosTitle"),
-                category: t("bgMultiserviciosCategory"),
-                problem: t("bgMultiserviciosProblem"),
-                solution: t("bgMultiserviciosSolution"),
-                goal: t("bgMultiserviciosGoal"),
-                image: "/Img/projects/bg-multiservicios/logo-principal.jpg",
-                tags: ["Branding", "Corporate Identity", "Logo Design"],
-                assetCount: 1,
+                title: t("project4Title"),
+                category: t("project4Category"),
+                description: t("project4Description"),
+                image: "/Img/Project4.png",
+                tags: ["React", "CSS3", "UUID"],
+                link: "https://org-rho-seven.vercel.app/",
+            },
+            {
+                title: t("project5Title"),
+                category: t("project5Category"),
+                description: t("project5Description"),
+                image: "/Img/Project5.png",
+                tags: ["React", "Styled", "Vite"],
+                link: "https://challege-aluraflix.vercel.app/",
             },
         ],
         [t]
@@ -295,22 +295,25 @@ export default function Projects() {
                                             <div className="flex flex-1 flex-col p-5 sm:p-6">
                                                 <h4 className="mb-2 text-xs font-bold uppercase tracking-widest text-primary/80">{project.category}</h4>
                                                 <h3 className="mb-3 text-lg font-bold leading-tight text-white sm:text-xl">{project.title}</h3>
-                                                <div className="mb-4 space-y-2 text-sm leading-relaxed text-zinc-400">
-                                                    <p className="line-clamp-2"><span className="font-bold text-zinc-200">{t("caseProblemLabel")}:</span> {project.problem}</p>
-                                                    <p className="line-clamp-2"><span className="font-bold text-zinc-200">{t("caseSolutionLabel")}:</span> {project.solution}</p>
-                                                    <p className="line-clamp-2"><span className="font-bold text-zinc-200">{t("caseGoalLabel")}:</span> {project.goal}</p>
-                                                </div>
-                                                <div className="mt-auto border-t border-white/5 pt-5">
-                                                    <div className="flex flex-wrap gap-2">
-                                                        {project.tags.slice(0, 3).map((tag) => (
-                                                            <span key={tag} className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-zinc-400">
-                                                                {tag}
-                                                            </span>
-                                                        ))}
-                                                    </div>
-                                                    <p className="mt-4 text-center text-[11px] font-bold uppercase tracking-[0.18em] text-primary/80">
-                                                        {project.assetCount} {project.assetCount === 1 ? t("caseAssetLabel") : t("caseAssetsLabel")}
-                                                    </p>
+                                                <p className="mb-4 line-clamp-3 text-sm leading-relaxed text-zinc-400" style={{ minHeight: "3.75rem" }}>{project.description}</p>
+                                                <div className="mt-auto flex justify-center border-t border-white/5 pt-5">
+                                                    <a
+                                                        href={project.link || "#"}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className={`h-11 w-full max-w-[210px] px-6 flex items-center justify-center whitespace-nowrap text-sm font-bold uppercase tracking-widest rounded-[20px] bg-zinc-100 dark:bg-zinc-900 text-black dark:text-white transition-all duration-300 ${!project.link ? "cursor-not-allowed opacity-50" : "hover:!bg-primary hover:!text-black"}`}
+                                                        onClick={(event: React.MouseEvent<HTMLAnchorElement>) => {
+                                                            if (!project.link) { event.preventDefault(); return; }
+                                                            event.stopPropagation();
+                                                        }}
+                                                    >
+                                                        <span className="flex items-center gap-2">
+                                                            {project.link ? t("viewProject") : t("comingSoon")}
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
+                                                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" />
+                                                            </svg>
+                                                        </span>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </GlassCard>

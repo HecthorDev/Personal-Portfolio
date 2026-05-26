@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "../lib/i18n/useLanguage";
+import GlassCard from "./ui/GlassCard";
 
 export default function About() {
     const { t } = useLanguage();
@@ -58,6 +59,18 @@ export default function About() {
                             <p className="text-lg leading-relaxed text-zinc-500 sm:text-xl">{t("aboutP3")}</p>
                             <p className="text-lg leading-relaxed text-zinc-500 sm:text-xl">{t("aboutP4")}</p>
                         </div>
+
+                        <GlassCard className="p-5 text-left sm:p-6" isInteractive={false}>
+                            <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-primary">
+                                {t("problemEyebrow")}
+                            </p>
+                            <h3 className="text-2xl font-bold leading-tight text-white sm:text-3xl">
+                                {t("problemTitle")}
+                            </h3>
+                            <p className="mt-4 text-base leading-relaxed text-zinc-400 sm:text-lg">
+                                {t("aboutConversionText")}
+                            </p>
+                        </GlassCard>
 
                         <div className="mt-auto pt-4 flex flex-col gap-3">
                             <p className="font-semibold text-xl leading-relaxed text-black dark:text-white sm:text-2xl">{t("aboutP5_1")}</p>
