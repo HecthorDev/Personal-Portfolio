@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useLanguage } from "../lib/i18n/useLanguage";
 import GlassCard from "./ui/GlassCard";
 
@@ -8,13 +8,19 @@ interface CaseStudy {
     problem: string;
     solution: string;
     goal: string;
-    cover: string;
-    supportingImages: string[];
+    images: string[];
     tags: string[];
+}
+
+interface LightboxImage {
+    src: string;
+    title: string;
 }
 
 export default function CaseStudies() {
     const { t } = useLanguage();
+    const [activeImages, setActiveImages] = useState<Record<string, string>>({});
+    const [lightboxImage, setLightboxImage] = useState<LightboxImage | null>(null);
 
     const caseStudies = useMemo<CaseStudy[]>(
         () => [
@@ -24,11 +30,19 @@ export default function CaseStudies() {
                 problem: t("rinconcitoDulceProblem"),
                 solution: t("rinconcitoDulceSolution"),
                 goal: t("rinconcitoDulceGoal"),
-                cover: "/Img/projects/rinconcito-dulce/post-apertura.jpg",
-                supportingImages: [
+                images: [
+                    "/Img/projects/rinconcito-dulce/post-apertura.jpg",
                     "/Img/projects/rinconcito-dulce/post-pre-apertura.jpg",
                     "/Img/projects/rinconcito-dulce/post-identidad.jpg",
+                    "/Img/projects/rinconcito-dulce/post-posicionamiento.jpg",
                     "/Img/projects/rinconcito-dulce/post-antojo.jpg",
+                    "/Img/projects/rinconcito-dulce/post-misterio.jpg",
+                    "/Img/projects/rinconcito-dulce/post-emocion.jpg",
+                    "/Img/projects/rinconcito-dulce/post-psicologico.jpg",
+                    "/Img/projects/rinconcito-dulce/post-intriga.jpg",
+                    "/Img/projects/rinconcito-dulce/logo-principal.png",
+                    "/Img/projects/rinconcito-dulce/logo-badge.jpg",
+                    "/Img/projects/rinconcito-dulce/logo-minimal.jpg",
                 ],
                 tags: ["Branding", "Social Media", "Launch Campaign", "Content Design"],
             },
@@ -38,8 +52,11 @@ export default function CaseStudies() {
                 problem: t("cindyGlamStudioProblem"),
                 solution: t("cindyGlamStudioSolution"),
                 goal: t("cindyGlamStudioGoal"),
-                cover: "/Img/projects/cindy-glam-studio/post-unas.jpg",
-                supportingImages: ["/Img/projects/cindy-glam-studio/jelly-spa-promo.jpg"],
+                images: [
+                    "/Img/projects/cindy-glam-studio/post-unas.jpg",
+                    "/Img/projects/cindy-glam-studio/jelly-spa-promo.jpg",
+                    "/Img/projects/cindy-glam-studio/logo-cindy-glam.jpg",
+                ],
                 tags: ["Beauty", "Social Media", "Promotion", "Visual Identity"],
             },
             {
@@ -48,8 +65,10 @@ export default function CaseStudies() {
                 problem: t("gmGrowthProblem"),
                 solution: t("gmGrowthSolution"),
                 goal: t("gmGrowthGoal"),
-                cover: "/Img/projects/gm-growth/post-publicar-mas.jpg",
-                supportingImages: ["/Img/projects/gm-growth/post-auditoria-digital.jpg"],
+                images: [
+                    "/Img/projects/gm-growth/post-publicar-mas.jpg",
+                    "/Img/projects/gm-growth/post-auditoria-digital.jpg",
+                ],
                 tags: ["Growth", "Strategy", "Content", "Education"],
             },
             {
@@ -58,13 +77,29 @@ export default function CaseStudies() {
                 problem: t("bgMultiserviciosProblem"),
                 solution: t("bgMultiserviciosSolution"),
                 goal: t("bgMultiserviciosGoal"),
-                cover: "/Img/projects/bg-multiservicios/logo-principal.jpg",
-                supportingImages: [],
+                images: ["/Img/projects/bg-multiservicios/logo-principal.jpg"],
                 tags: ["Branding", "Corporate Identity", "Logo Design"],
             },
         ],
         [t]
     );
+
+    useEffect(() => {
+        if (!lightboxImage) return;
+
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "Escape") setLightboxImage(null);
+        };
+
+        document.addEventListener("keydown", handleKeyDown);
+        document.body.style.overflow = "hidden";
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+            document.body.style.overflow = "";
+        };
+    }, [lightboxImage]);
+
+    const getActiveImage = (caseStudy: CaseStudy) => activeImages[caseStudy.title] ?? caseStudy.images[0];
 
     return (
         <section id="case-studies" className="relative bg-black py-20 sm:py-24">
@@ -78,87 +113,58 @@ export default function CaseStudies() {
                     </p>
                 </div>
 
-                <div className="space-y-6 lg:space-y-8">
-                    <GlassCard className="services-card-unified p-0" isInteractive={false}>
-                        <div className="grid grid-cols-1 gap-0 lg:grid-cols-2">
-                            <div className="grid gap-3 bg-zinc-950/70 p-4 sm:p-5 lg:grid-cols-[1.25fr_0.75fr]">
-                                <div className="flex min-h-[420px] items-center justify-center rounded-2xl border border-white/10 bg-black/40 p-3 sm:min-h-[520px]">
-                                    <img
-                                        src={caseStudies[0].cover}
-                                        alt={caseStudies[0].title}
-                                        className="max-h-[500px] w-full object-contain"
-                                        loading="lazy"
-                                        draggable={false}
-                                    />
-                                </div>
-                                <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 lg:grid-cols-1">
-                                    {caseStudies[0].supportingImages.map((image) => (
-                                        <div key={image} className="flex min-h-[220px] items-center justify-center rounded-2xl border border-white/10 bg-black/40 p-2 sm:min-h-[190px] lg:min-h-[160px]">
-                                            <img
-                                                src={image}
-                                                alt={caseStudies[0].title}
-                                                className="max-h-[210px] w-full object-contain sm:max-h-[190px] lg:max-h-[165px]"
-                                                loading="lazy"
-                                                draggable={false}
-                                            />
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                            <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
-                                <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-primary/85 sm:text-xs">
-                                    {caseStudies[0].category}
-                                </p>
-                                <h3 className="mb-5 text-3xl font-bold leading-tight text-white sm:text-4xl">
-                                    {caseStudies[0].title}
-                                </h3>
-                                <div className="space-y-3 text-sm leading-relaxed text-zinc-400 sm:text-base">
-                                    <p><span className="font-bold text-zinc-200">{t("caseProblemLabel")}:</span> {caseStudies[0].problem}</p>
-                                    <p><span className="font-bold text-zinc-200">{t("caseSolutionLabel")}:</span> {caseStudies[0].solution}</p>
-                                    <p><span className="font-bold text-zinc-200">{t("caseGoalLabel")}:</span> {caseStudies[0].goal}</p>
-                                </div>
-                                <div className="mt-6 flex flex-wrap gap-2">
-                                    {caseStudies[0].tags.map((tag) => (
-                                        <span key={tag} className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-zinc-400">
-                                            {tag}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    </GlassCard>
-
-                    <div className="grid grid-cols-1 gap-5 lg:grid-cols-3 lg:gap-7">
-                        {caseStudies.slice(1).map((caseStudy) => (
+                <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-7">
+                    {caseStudies.map((caseStudy) => {
+                        const activeImage = getActiveImage(caseStudy);
+                        return (
                             <GlassCard key={caseStudy.title} className="services-card-unified h-full p-0" isInteractive={false}>
                                 <div className="flex h-full flex-col">
-                                    <div className="space-y-3 bg-zinc-950/70 p-4">
-                                        <div className="flex min-h-[330px] items-center justify-center rounded-2xl border border-white/10 bg-black/40 p-3">
+                                    <div className="bg-zinc-950/70 p-4 sm:p-5">
+                                        <button
+                                            type="button"
+                                            onClick={() => setLightboxImage({ src: activeImage, title: caseStudy.title })}
+                                            className="group/image flex h-[360px] w-full items-center justify-center rounded-2xl border border-white/10 bg-black/40 p-4 transition-colors hover:border-primary/45 sm:h-[430px]"
+                                            aria-label={`${t("caseOpenImageLabel")} ${caseStudy.title}`}
+                                        >
                                             <img
-                                                src={caseStudy.cover}
+                                                src={activeImage}
                                                 alt={caseStudy.title}
-                                                className="max-h-[300px] w-full object-contain"
+                                                className="max-h-full w-full object-contain transition-transform duration-500 group-hover/image:scale-[1.025]"
                                                 loading="lazy"
                                                 draggable={false}
                                             />
+                                        </button>
+
+                                        <div className="mt-4 flex gap-3 overflow-x-auto pb-1 scrollbar-hide">
+                                            {caseStudy.images.map((image) => {
+                                                const isActive = image === activeImage;
+                                                return (
+                                                    <button
+                                                        key={image}
+                                                        type="button"
+                                                        onClick={() => setActiveImages((prev) => ({ ...prev, [caseStudy.title]: image }))}
+                                                        onDoubleClick={() => setLightboxImage({ src: image, title: caseStudy.title })}
+                                                        className={`flex h-24 w-24 shrink-0 items-center justify-center rounded-xl border bg-black/40 p-2 transition sm:h-28 sm:w-28 ${isActive ? "border-primary/70" : "border-white/10 hover:border-primary/45"}`}
+                                                        aria-label={`${t("caseSelectImageLabel")} ${caseStudy.title}`}
+                                                    >
+                                                        <img
+                                                            src={image}
+                                                            alt={caseStudy.title}
+                                                            className="h-full w-full object-contain"
+                                                            loading="lazy"
+                                                            draggable={false}
+                                                        />
+                                                    </button>
+                                                );
+                                            })}
                                         </div>
-                                        {caseStudy.supportingImages.length > 0 && (
-                                            <div className="flex min-h-[220px] items-center justify-center rounded-2xl border border-white/10 bg-black/40 p-3">
-                                                <img
-                                                    src={caseStudy.supportingImages[0]}
-                                                    alt={caseStudy.title}
-                                                    className="max-h-[205px] w-full object-contain"
-                                                    loading="lazy"
-                                                    draggable={false}
-                                                />
-                                            </div>
-                                        )}
                                     </div>
+
                                     <div className="flex flex-1 flex-col p-5 sm:p-6">
                                         <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.18em] text-primary/85">
                                             {caseStudy.category}
                                         </p>
-                                        <h3 className="mb-4 text-2xl font-bold leading-tight text-white">
+                                        <h3 className="mb-4 text-2xl font-bold leading-tight text-white sm:text-3xl">
                                             {caseStudy.title}
                                         </h3>
                                         <div className="space-y-2 text-sm leading-relaxed text-zinc-400">
@@ -167,7 +173,7 @@ export default function CaseStudies() {
                                             <p><span className="font-bold text-zinc-200">{t("caseGoalLabel")}:</span> {caseStudy.goal}</p>
                                         </div>
                                         <div className="mt-auto flex flex-wrap gap-2 pt-5">
-                                            {caseStudy.tags.slice(0, 3).map((tag) => (
+                                            {caseStudy.tags.slice(0, 4).map((tag) => (
                                                 <span key={tag} className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-zinc-400">
                                                     {tag}
                                                 </span>
@@ -176,10 +182,36 @@ export default function CaseStudies() {
                                     </div>
                                 </div>
                             </GlassCard>
-                        ))}
-                    </div>
+                        );
+                    })}
                 </div>
             </div>
+
+            {lightboxImage && (
+                <div
+                    className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 backdrop-blur-md"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-label={lightboxImage.title}
+                    onClick={() => setLightboxImage(null)}
+                >
+                    <button
+                        type="button"
+                        aria-label={t("caseCloseImageLabel")}
+                        onClick={() => setLightboxImage(null)}
+                        className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-black/70 text-white transition hover:border-primary hover:text-primary"
+                    >
+                        <span className="text-2xl leading-none">×</span>
+                    </button>
+                    <img
+                        src={lightboxImage.src}
+                        alt={lightboxImage.title}
+                        className="max-h-[90vh] max-w-[94vw] object-contain"
+                        draggable={false}
+                        onClick={(event) => event.stopPropagation()}
+                    />
+                </div>
+            )}
         </section>
     );
 }

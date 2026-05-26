@@ -22,7 +22,7 @@ export default function Services() {
                 subtitle: t("serviceUiSubtitle"),
                 description: t("serviceUiDescription"),
                 badge: t("serviceUiBadge"),
-                iconSrc: "https://img.icons8.com/fluency/240/web-design.png",
+                iconSrc: "https://img.icons8.com/fluency/240/landing-page.png",
                 accent: "#00E676",
             },
             {
@@ -30,7 +30,7 @@ export default function Services() {
                 subtitle: t("serviceFullStackSubtitle"),
                 description: t("serviceFullStackDescription"),
                 badge: t("serviceFullStackBadge"),
-                iconSrc: "https://img.icons8.com/fluency/240/source-code.png",
+                iconSrc: "https://img.icons8.com/fluency/240/content.png",
                 accent: "#6EE7B7",
             },
             {
@@ -38,7 +38,7 @@ export default function Services() {
                 subtitle: t("serviceImmersiveSubtitle"),
                 description: t("serviceImmersiveDescription"),
                 badge: t("serviceImmersiveBadge"),
-                iconSrc: "https://img.icons8.com/fluency/240/virtual-reality.png",
+                iconSrc: "https://img.icons8.com/fluency/240/advertising.png",
                 accent: "#22D3EE",
             },
             {
@@ -46,7 +46,7 @@ export default function Services() {
                 subtitle: t("serviceMobileSubtitle"),
                 description: t("serviceMobileDescription"),
                 badge: t("serviceMobileBadge"),
-                iconSrc: "https://img.icons8.com/fluency/240/smartphone-tablet.png",
+                iconSrc: "https://img.icons8.com/fluency/240/growth.png",
                 accent: "#60A5FA",
             },
         ],
@@ -77,7 +77,7 @@ export default function Services() {
                                             loading="lazy"
                                             draggable={false}
                                             onError={(event) => {
-                                                event.currentTarget.src = "https://img.icons8.com/fluency/240/code.png";
+                                                event.currentTarget.src = "https://img.icons8.com/fluency/240/commercial.png";
                                             }}
                                             className="h-14 w-14 object-contain sm:h-16 sm:w-16"
                                             style={{ filter: `drop-shadow(0 8px 20px ${service.accent}44)` }}

@@ -6,8 +6,8 @@ export default function About() {
     const { t } = useLanguage();
 
     return (
-        <section id="about" className="relative overflow-hidden bg-black py-20 sm:py-24">
-            <div className="mx-auto flex max-w-7xl flex-col items-start gap-12 px-5 sm:px-8 md:flex-row md:items-start md:px-16 lg:gap-16 lg:px-20">
+        <section id="about" className="relative overflow-visible bg-black py-24 sm:py-28">
+            <div className="mx-auto flex max-w-7xl flex-col items-center gap-12 px-5 sm:px-8 lg:flex-row lg:items-center lg:gap-14 md:px-16 lg:px-20">
 
                 {/* Image column */}
                 <motion.div
@@ -15,9 +15,9 @@ export default function About() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
-                    className="relative flex flex-1 w-full justify-center md:justify-end"
+                    className="relative flex w-full justify-center lg:flex-[0.9] lg:justify-end"
                 >
-                    <div className="relative w-full max-w-[400px] aspect-[3/4] md:max-w-[450px] lg:max-w-[500px] rounded-[3rem] bg-zinc-900 shadow-2xl shrink-0">
+                    <div className="relative w-full max-w-[360px] aspect-[3/4] sm:max-w-[400px] lg:max-w-[430px] rounded-[3rem] bg-zinc-900 shadow-2xl shrink-0">
                         <img
                             src="/Img/ProfilePhoto.jpeg"
                             alt="Hector Garcia - About"
@@ -43,9 +43,9 @@ export default function About() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
-                    className="flex-1 w-full text-center md:text-left flex flex-col pt-8 sm:pt-0"
+                    className="w-full text-center md:text-left flex flex-col lg:flex-[1.1]"
                 >
-                    <div className="flex flex-col h-full justify-between gap-6 md:gap-8 xl:gap-10">
+                    <div className="flex max-w-3xl flex-col gap-6 md:gap-7">
                         <h2 className="text-5xl font-bold uppercase tracking-wide text-white sm:text-6xl md:text-7xl">
                             {t("aboutPrefix")} <span className="text-primary">{t("aboutHighlight")}</span>
                         </h2>
@@ -60,7 +60,7 @@ export default function About() {
                             <p className="text-lg leading-relaxed text-zinc-500 sm:text-xl">{t("aboutP4")}</p>
                         </div>
 
-                        <GlassCard className="p-5 text-left sm:p-6" isInteractive={false}>
+                        <GlassCard className="w-full max-w-2xl p-5 text-left sm:p-6" isInteractive={false}>
                             <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-primary">
                                 {t("problemEyebrow")}
                             </p>
@@ -72,7 +72,7 @@ export default function About() {
                             </p>
                         </GlassCard>
 
-                        <div className="mt-auto pt-4 flex flex-col gap-3">
+                        <div className="pt-2 flex flex-col gap-3">
                             <p className="font-semibold text-xl leading-relaxed text-black dark:text-white sm:text-2xl">{t("aboutP5_1")}</p>
                             <p className="font-semibold text-xl leading-relaxed text-primary sm:text-2xl">{t("aboutP5_2")}</p>
                         </div>
