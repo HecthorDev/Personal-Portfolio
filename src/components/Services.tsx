@@ -54,7 +54,7 @@ export default function Services() {
     );
 
     return (
-        <section id="services" className="relative bg-black py-20 sm:py-24">
+        <section id="services" className="relative scroll-mt-24 bg-black py-20 sm:py-24">
             <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 md:px-16 lg:px-20">
                 <div className="mb-10 space-y-4 text-center sm:mb-14">
                     <h2 className="text-3xl font-bold text-white sm:text-4xl md:text-5xl">
