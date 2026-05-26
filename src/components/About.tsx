@@ -18,7 +18,7 @@ export default function About() {
                 >
                     <div className="relative w-full max-w-[400px] aspect-[3/4] md:max-w-[450px] lg:max-w-[500px] rounded-[3rem] bg-zinc-900 shadow-2xl shrink-0">
                         <img
-                            src="/Img/hector2.png"
+                            src="/Img/ProfilePhoto.jpeg"
                             alt="Hector Garcia - About"
                             className="h-full w-full rounded-[3rem] object-cover grayscale transition-all duration-500 hover:grayscale-0"
                         />
