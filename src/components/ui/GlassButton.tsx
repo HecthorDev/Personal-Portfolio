@@ -1,8 +1,9 @@
 
 import { motion } from "framer-motion";
+import type { HTMLMotionProps } from "framer-motion";
 import type { ReactNode } from "react";
 
-interface GlassButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface GlassButtonProps extends HTMLMotionProps<"button"> {
     children: ReactNode;
     className?: string;
     variant?: "primary" | "secondary" | "ghost";
